@@ -8,7 +8,8 @@ export async function fetchLyrics(songTitle, artistName) {
     }); */
     const res = await fetch(`https://lyrist.vercel.app/api/${songTitle}/${artistName}`)
     
-    const data = await res.json()
+   
+     const data = await res.json()
 
-    return data
+    return data 
 }

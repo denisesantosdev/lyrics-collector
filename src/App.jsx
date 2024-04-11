@@ -1,12 +1,15 @@
-import { useState, useEffect, useContext } from "react";
-import {LyricsDataProvider} from "./context/LyricsDataContext";
-import SongPage from "./pages/SongPage";
+import { useState, useEffect, useContext, createContext } from "react";
+import SearchPage from "./pages/SearchPage";
+import LyricsData from "./context/LyricsDataContext";
+import LyricsPage from "./pages/LyricsPage";
+import SavedLyricsPage from "./pages/SavedLyricsPage";
 
 function App() {
   return (
-    <LyricsDataProvider>
-      <SongPage />
-    </LyricsDataProvider>
+    <LyricsData>
+      <SearchPage/>
+      <SavedLyricsPage/>
+    </LyricsData>
   );
 }
 

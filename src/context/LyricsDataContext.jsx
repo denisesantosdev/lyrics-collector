@@ -1,35 +1,15 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { fetchLyrics } from "../services/lyrics-api";
+import React, { createContext, useState } from "react";
 
-const LyricsDataContext = createContext("");
+export const lyricsDataContext = createContext({});
 
-const useApiData = () => useContext(LyricsDataContext);
-
-const LyricsDataProvider = ({ children }) => {
-  const [lyricsData, setLyricsData] = useState('initial state');
-
-  useEffect(() => {
-    async function getLyrics() {
-      try {
-        const apiData = await fetchLyrics(
-          "the ship in port",
-          "radical face"
-        );
-
-        setLyricsData(apiData)
-      } catch (error) {
-        console.error("Error fetching Data", error);
-      }
-    }
-
-    //getLyrics();
-  }, []);
+const LyricsDataContext = ({ children }) => {
+  const [lyricsData, setLyricsData] = useState(null);
 
   return (
-    <LyricsDataContext.Provider value={lyricsData}>
+    <lyricsDataContext.Provider value={{ lyricsData, setLyricsData }}>
       {children}
-    </LyricsDataContext.Provider>
+    </lyricsDataContext.Provider>
   );
 };
 
-export {LyricsDataProvider, useApiData};
+export default LyricsDataContext;
