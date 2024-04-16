@@ -28,6 +28,7 @@ const SongLyrics = () => {
       const docRef = await addDoc(collection(db, "lyrics"), {
         songTitle: lyricsData.songTitle,
         artistName: lyricsData.artistName,
+        lyrics: lyricsData.lyrics,
         uid: auth.currentUser.uid,
         createdAt: serverTimestamp(),
       });
@@ -35,13 +36,6 @@ const SongLyrics = () => {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }
-
-  async function getAllLyricsFromDB() {
-    const querySnapshot = await getDocs(collection(db, "lyrics"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    });
   }
 
   //console.log(lyricsData);
@@ -64,15 +58,6 @@ const SongLyrics = () => {
         ) : (
           <h1>Loading...</h1>
         )}
-      </div>
-
-      <div>
-        <button onClick={() => getAllLyricsFromDB()}>
-          Show all saved lyrics
-        </button>
-
-        <div>
-        </div>
       </div>
     </div>
   );

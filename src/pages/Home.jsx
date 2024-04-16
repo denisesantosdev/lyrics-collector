@@ -99,7 +99,7 @@ const Home = ({isUserLoggedIn,authSignOut}) => {
         {lyricsData ? <SongLyrics /> : <h1>Search for your favorite songs</h1>}
       </section>
 
-      {isUserLoggedIn && <SavedLyrics />}
+      {isUserLoggedIn && <SavedLyrics isUserLoggedIn={isUserLoggedIn}/>}
     </>
   );
 };
