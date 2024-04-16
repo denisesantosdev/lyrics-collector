@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { fetchLyrics } from "../services/lyrics-api";
 import { lyricsDataContext } from "../context/LyricsDataContext";
-import LyricsPage from "./LyricsPage";
+import SavedLyrics from "../components/SavedLyrics/SavedLyrics"
+import SongLyrics from "../components/SongLyrics/SongLyrics";
 
-const SearchPage = () => {
+
+const Home = ({isUserLoggedIn,authSignOut}) => {
   const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
 
   const [searchQuery, setSearchQuery] = useState({
@@ -51,9 +53,9 @@ const SearchPage = () => {
           setSearchQuery({});
         } catch (err) {
           if (err.message === "404") {
-            //console.log("not found");
+            console.log("not found");
           } else {
-            //console.log(err.message);
+            console.log(err.message);
           }
         }
       }
@@ -63,28 +65,43 @@ const SearchPage = () => {
   }, [formIsSubmitted]);
 
   return (
-    <section>
-      <form onSubmit={handleOnSubmit}>
-        <input
-          type="text"
-          placeholder="Song Name"
-          name="songName"
-          onChange={handleOnChange}
-          required={true}
-        />
-        <input
-          type="text"
-          placeholder="Artist Name"
-          name="artistName"
-          onChange={handleOnChange}
-          required={true}
-        />
-        <button>Search</button>
-      </form>
+    <>
+      <header>
+      {isUserLoggedIn ? (
+        <div>
+          <button onClick={authSignOut}>Sign Out</button>
+        </div>
+      ) : (
+        <div>
+          <button>Sign In</button>
+          <button>Create account</button>
+        </div>
+      )}
+    </header>
+      <section>
+        <form onSubmit={handleOnSubmit}>
+          <input
+            type="text"
+            placeholder="Song Name"
+            name="songName"
+            onChange={handleOnChange}
+            required={true}
+          />
+          <input
+            type="text"
+            placeholder="Artist Name"
+            name="artistName"
+            onChange={handleOnChange}
+            required={true}
+          />
+          <button>Search</button>
+        </form>
+        {lyricsData ? <SongLyrics /> : <h1>Search for your favorite songs</h1>}
+      </section>
 
-      {lyricsData ? <LyricsPage /> : <h1>Search for your favorite songs</h1>}
-    </section>
+      {isUserLoggedIn && <SavedLyrics />}
+    </>
   );
 };
 
-export default SearchPage;
+export default Home;
