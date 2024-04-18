@@ -4,13 +4,14 @@ import { lyricsDataContext } from "../../context/LyricsDataContext";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { firebaseConfig } from "../../../firebase/firebaseConfig";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, setDoc } from "firebase/firestore";
 
 import {
   collection,
   addDoc,
   serverTimestamp,
   getDocs,
+  doc
 } from "firebase/firestore";
 
 const app = initializeApp(firebaseConfig);
@@ -25,13 +26,17 @@ const SongLyrics = () => {
 
   async function saveLyricsToDB() {
     try {
-      const docRef = await addDoc(collection(db, "lyrics"), {
+      const docRef = doc(collection(db, "lyrics"));
+
+      await setDoc(docRef, {
         songTitle: lyricsData.songTitle,
         artistName: lyricsData.artistName,
         lyrics: lyricsData.lyrics,
         uid: auth.currentUser.uid,
         createdAt: serverTimestamp(),
-      });
+        id: docRef.id,
+        albumImageUrl: lyricsData.albumImage,
+      })
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
