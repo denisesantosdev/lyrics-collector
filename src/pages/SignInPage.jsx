@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import useAuth from "../customHooks/useAuth";
 
-const SignInPage = ({ authCreateAccountWithEmail, authSignInWithEmail, authSignInWithGoogle }) => {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+const SignInPage = () => {
+  const {
+    user,
+    setUser,
+    authCreateAccountWithEmail,
+    authSignInWithEmail,
+    authSignInWithGoogle,
+  } = useAuth();
 
   function handleOnChange(event) {
     setUser({
@@ -27,21 +31,19 @@ const SignInPage = ({ authCreateAccountWithEmail, authSignInWithEmail, authSignI
         type="password"
         name="password"
         id="password"
-        required
         onChange={handleOnChange}
+        required
       />
-      <button 
-        onClick={() => authSignInWithEmail(user.email, user.password)}>
+      <button onClick={() => authSignInWithEmail(user.email, user.password)}>
         Sign in
       </button>
       <button
         onClick={() => authCreateAccountWithEmail(user.email, user.password)}>
         Create account
       </button>
-      <button 
-        onClick={()=>authSignInWithGoogle()}>
-          Sign in with Google
-        </button>
+      <button onClick={() => authSignInWithGoogle()}>
+        Sign in with Google
+      </button>
     </div>
   );
 };
