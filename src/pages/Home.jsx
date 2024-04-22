@@ -3,9 +3,10 @@ import { fetchLyrics } from "../services/lyrics-api";
 import { lyricsDataContext } from "../context/LyricsDataContext";
 import SavedLyrics from "../components/SavedLyrics/SavedLyrics"
 import SongLyrics from "../components/SongLyrics/SongLyrics";
+import SignOutBtn from "../components/SignOutBtn/SignOutBtn"
 
 
-const Home = ({isUserLoggedIn,authSignOut}) => {
+const Home = ({isUserLoggedIn}) => {
   const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
 
   const [searchQuery, setSearchQuery] = useState({
@@ -68,9 +69,7 @@ const Home = ({isUserLoggedIn,authSignOut}) => {
     <>
       <header>
       {isUserLoggedIn ? (
-        <div>
-          <button onClick={authSignOut}>Sign Out</button>
-        </div>
+        <SignOutBtn/>
       ) : (
         <div>
           <button>Sign In</button>

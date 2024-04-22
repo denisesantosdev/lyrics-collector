@@ -19,7 +19,6 @@ const auth = getAuth(app);
 
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [savedLyrics, setSavedLyrics] = useState([]);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -37,25 +36,13 @@ function App() {
     }
   });
 
-  function authSignOut() {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("You're now logged out");
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error.message);
-      });
-  } 
-
   return (
     <LyricsData>
       {!isUserLoggedIn && (
         <SignInPage/>
       )}
 
-      <Home isUserLoggedIn={isUserLoggedIn} authSignOut={authSignOut}/>
+      <Home isUserLoggedIn={isUserLoggedIn} />
     </LyricsData>
   );
 }
