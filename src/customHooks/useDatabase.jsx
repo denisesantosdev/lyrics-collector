@@ -27,6 +27,7 @@ const useDatabase = () => {
   const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
   const [savedLyrics, setSavedLyrics] = useState([]);
   const [isDbAltered, setIsDbAltered] = useState(false);
+  const [filteredArtists,setFilteredArtists] = useState([])
   
   const collectionName = 'lyrics'
   const lyricsRef = collection(db, collectionName)
@@ -76,9 +77,11 @@ const useDatabase = () => {
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data(), doc.id);
+    const fetchedData = querySnapshot.docs.map((doc) => {
+      return doc.data();
     });
+
+    setFilteredArtists(fetchedData)
   }
 
   async function deleteSongLyricFromDB(docId) {
@@ -94,6 +97,7 @@ const useDatabase = () => {
     deleteSongLyricFromDB,
     savedLyrics,
     isDbAltered,
+    filteredArtists
   };
 };
 
