@@ -5,7 +5,6 @@ import SongLyrics from "../components/SongLyrics/SongLyrics";
 import SignOutBtn from "../components/SignOutBtn/SignOutBtn"
 import SearchForm from "../components/SearchForm/SearchForm";
 
-
 const Home = ({isUserLoggedIn}) => {
   const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
 

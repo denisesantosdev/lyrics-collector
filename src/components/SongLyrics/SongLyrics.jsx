@@ -1,47 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { lyricsDataContext } from "../../context/LyricsDataContext";
-
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { firebaseConfig } from "../../../firebase/firebaseConfig";
-import { getFirestore, setDoc } from "firebase/firestore";
-
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  getDocs,
-  doc
-} from "firebase/firestore";
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+import useDatabase from "../../customHooks/useDatabase";
 
 const SongLyrics = () => {
   const { lyricsData } = useContext(lyricsDataContext);
 
-  async function saveLyricsToDB() {
-    try {
-      const docRef = doc(collection(db, "lyrics"));
-
-      await setDoc(docRef, {
-        songTitle: lyricsData.songTitle,
-        artistName: lyricsData.artistName,
-        lyrics: lyricsData.lyrics,
-        uid: auth.currentUser.uid,
-        createdAt: serverTimestamp(),
-        id: docRef.id,
-        albumImageUrl: lyricsData.albumImage,
-      })
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }
+  const { saveLyricsToDB } = useDatabase();
 
   //console.log(lyricsData);
   return (
