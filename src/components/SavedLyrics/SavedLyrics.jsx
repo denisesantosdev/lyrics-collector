@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { lyricsDataContext } from "../../context/LyricsDataContext";
 import SongLyrics from "../SongLyrics/SongLyrics";
 import useDatabase from "../../customHooks/useDatabase";
+import LyricsCard from "../LyricsCard/LyricsCard";
 
 const SavedLyrics = ({ isUserLoggedIn }) => {
   const { setLyricsData } = useContext(lyricsDataContext);
@@ -20,43 +21,21 @@ const SavedLyrics = ({ isUserLoggedIn }) => {
     if (filteredArtists.length === 0) {
       return savedLyrics.map((item, index) => {
         return (
-          <a key={index}>
-            <div>
-              <img
-                src={item.albumImageUrl}
-                alt="album image"
-              />
-              <div>
-                <h1>{item.songTitle}</h1>
-                <h2>{item.artistName}</h2>
-              </div>
-
-              <button onClick={() => deleteSongLyricFromDB(item.id)}>
-                Delete
-              </button>
-            </div>
-          </a>
+          <LyricsCard
+            key={index}
+            item={item}
+            deleteSongLyricFromDB={deleteSongLyricFromDB}
+          />
         );
       });
     } else {
       return filteredArtists.map((item, index) => {
         return (
-          <a key={index}>
-            <div>
-              <img
-                src={item.albumImageUrl}
-                alt="album image"
-              />
-              <div>
-                <h1>{item.songTitle}</h1>
-                <h2>{item.artistName}</h2>
-              </div>
-
-              <button onClick={() => deleteSongLyricFromDB(item.id)}>
-                Delete
-              </button>
-            </div>
-          </a>
+          <LyricsCard
+            key={index}
+            item={item}
+            deleteSongLyricFromDB={deleteSongLyricFromDB}
+          />
         );
       });
     }
