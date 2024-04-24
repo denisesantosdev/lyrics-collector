@@ -27,10 +27,14 @@ const useDatabase = () => {
   const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
   const [savedLyrics, setSavedLyrics] = useState([]);
   const [isDbAltered, setIsDbAltered] = useState(false);
-  const [filteredArtists,setFilteredArtists] = useState([])
-  
-  const collectionName = 'lyrics'
-  const lyricsRef = collection(db, collectionName)
+  const [filteredArtists, setFilteredArtists] = useState([]);
+  const [itemExists, setItemExists] = useState({
+    itemInDB: "",
+    itemStatus: false,
+  });
+
+  const collectionName = "lyrics";
+  const lyricsRef = collection(db, collectionName);
 
   async function saveLyricsToDB() {
     try {
@@ -48,6 +52,33 @@ const useDatabase = () => {
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
+    }
+
+    setIsDbAltered((prev) => !prev);
+  }
+
+  async function checkIfItemExistsInDB(itemInDB, itemToCompare) {
+    const q = query(
+      lyricsRef,
+      where("uid", "==", auth.currentUser.uid),
+      where(itemInDB, "==", itemToCompare)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const fetchedData = querySnapshot.docs.map((doc) => {
+      return doc.data();
+    });
+
+    if (!querySnapshot.empty) {
+      setItemExists({
+        itemInDB: fetchedData[0],
+        itemStatus: true,
+      });
+    } else {
+      setItemExists({
+        itemInDB: "",
+        itemStatus: false,
+      });
     }
   }
 
@@ -81,7 +112,7 @@ const useDatabase = () => {
       return doc.data();
     });
 
-    setFilteredArtists(fetchedData)
+    setFilteredArtists(fetchedData);
   }
 
   async function deleteSongLyricFromDB(docId) {
@@ -97,7 +128,9 @@ const useDatabase = () => {
     deleteSongLyricFromDB,
     savedLyrics,
     isDbAltered,
-    filteredArtists
+    filteredArtists,
+    checkIfItemExistsInDB,
+    itemExists,
   };
 };
 

@@ -5,9 +5,18 @@ import useDatabase from "../../customHooks/useDatabase";
 const SongLyrics = () => {
   const { lyricsData } = useContext(lyricsDataContext);
 
-  const { saveLyricsToDB } = useDatabase();
+  const {
+    saveLyricsToDB,
+    checkIfItemExistsInDB,
+    itemExists,
+    deleteSongLyricFromDB,
+    isDbAltered,
+  } = useDatabase();
 
-  //console.log(lyricsData);
+  useEffect(() => {
+    checkIfItemExistsInDB("albumImageUrl", lyricsData.albumImage);
+  }, [isDbAltered]);
+
   return (
     <div>
       <div>
@@ -19,7 +28,14 @@ const SongLyrics = () => {
             />
             <div>
               <h1>{lyricsData.songTitle}</h1>
-              <button onClick={() => saveLyricsToDB()}>Save</button>
+              {itemExists.itemStatus ? (
+                <button
+                  onClick={() => deleteSongLyricFromDB(itemExists.itemInDB.id)}>
+                  Delete
+                </button>
+              ) : (
+                <button onClick={() => saveLyricsToDB()}>Save</button>
+              )}
             </div>
             <h2>{lyricsData.artistName}</h2>
             <p style={{ whiteSpace: "pre-wrap" }}>{lyricsData.lyrics}</p>
