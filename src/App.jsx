@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import Home from "./pages/Home";
 import LyricsData from "./context/LyricsDataContext";
+import ToastContextProvider from "./context/ToastContext";
+import Toast from "./components/Toast/Toast";
 import SignInPage from "./pages/SignInPage";
 
 import { initializeApp } from "firebase/app";
@@ -37,13 +39,14 @@ function App() {
   });
 
   return (
-    <LyricsData>
-      {!isUserLoggedIn && (
-        <SignInPage/>
-      )}
+    <ToastContextProvider>
+      <LyricsData>
+        {!isUserLoggedIn && <SignInPage />}
+        <Home isUserLoggedIn={isUserLoggedIn} />
+      </LyricsData>
 
-      <Home isUserLoggedIn={isUserLoggedIn} />
-    </LyricsData>
+      <Toast />
+    </ToastContextProvider>
   );
 }
 

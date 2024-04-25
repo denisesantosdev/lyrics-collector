@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { fetchLyrics } from "../../services/lyrics-api";
-import {lyricsDataContext} from "../../context/LyricsDataContext";
+import { lyricsDataContext } from "../../context/LyricsDataContext";
+import { ToastContext } from "../../context/ToastContext";
 
 const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState({});
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
 
-  const {lyricsData,setLyricsData} = useContext(lyricsDataContext)
+  const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
+
+  const { setToastState } = useContext(ToastContext);
 
   function handleOnSubmit(event) {
     event.preventDefault();
@@ -48,8 +51,17 @@ const SearchForm = () => {
         } catch (err) {
           if (err.message === "404") {
             console.log("not found");
+            setToastState({
+              visible: true,
+              message: "oh-oh! Song or artist not found.",
+              type: "error",
+            });
           } else {
-            console.log(err.message);
+            setToastState({
+              visible: true,
+              message: "oh-oh! An error has ocurred.",
+              type: "error",
+            });
           }
         }
       }
