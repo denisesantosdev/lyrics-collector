@@ -5,6 +5,8 @@ import LyricsData from "./context/LyricsDataContext";
 import ToastContextProvider from "./context/ToastContext";
 import Toast from "./components/Toast/Toast";
 import SignInPage from "./pages/SignInPage";
+import GlobalStyle from "./theme/GlobalStyle";
+import { lightTheme } from "./theme/themes";
 
 import { initializeApp } from "firebase/app";
 import {
@@ -39,14 +41,16 @@ function App() {
   });
 
   return (
-    <ToastContextProvider>
-      <LyricsData>
-        {!isUserLoggedIn && <SignInPage />}
-        <Home isUserLoggedIn={isUserLoggedIn} />
-      </LyricsData>
-
-      <Toast />
-    </ToastContextProvider>
+    <>
+      <GlobalStyle theme={lightTheme}/>
+      <ToastContextProvider>
+        <LyricsData>
+          {!isUserLoggedIn && <SignInPage />}
+          <Home isUserLoggedIn={isUserLoggedIn} />
+        </LyricsData>
+        <Toast />
+      </ToastContextProvider>
+    </>
   );
 }
 
