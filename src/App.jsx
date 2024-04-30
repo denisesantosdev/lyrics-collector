@@ -47,7 +47,7 @@ function App() {
       <GlobalStyle />
         <ToastContextProvider>
           <LyricsData>
-            {!isUserLoggedIn && <SignInPage />}
+           {/*  {!isUserLoggedIn && <SignInPage />} */}
             <Home isUserLoggedIn={isUserLoggedIn} />
           </LyricsData>
           <Toast />

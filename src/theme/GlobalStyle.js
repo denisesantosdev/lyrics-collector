@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${(props) => props.theme.fonts.body};
     background-color: ${(props) => props.theme.colors.background};
+    overflow-x: hidden;
   }
 
 /* 

@@ -31,7 +31,7 @@ const lightTheme = {
     error: "#f28b82", // Pastel red for error state
     warning: "#ffad47", // Pastel orange for warning state
     success: "#a0d99b", // Pastel green for success state
-    //accent: "#8ecae6", // Soft pastel blue for accent color
+    accent: "#8ecae6", // Soft pastel blue for accent color
     accent: "#333333",
     border: "#333333",
   },

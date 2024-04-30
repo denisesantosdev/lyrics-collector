@@ -3,6 +3,12 @@ import { fetchLyrics } from "../../services/lyrics-api";
 import { lyricsDataContext } from "../../context/LyricsDataContext";
 import { ToastContext } from "../../context/ToastContext";
 import Btn from "../Btn/Btn";
+import Input from "../Input/Input";
+import styled from "styled-components";
+
+const StyledForm = styled.form`
+  display: grid;
+`
 
 const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState({});
@@ -72,26 +78,26 @@ const SearchForm = () => {
   }, [formIsSubmitted]);
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <input
-        type="text"
-        placeholder="Song Name"
+    <StyledForm onSubmit={handleOnSubmit}>
+      <Input
+        placeholder="Song Title"
         name="songTitle"
-        onChange={handleOnChange}
         required={true}
+        id="songTitle"
+        handleOnChange={handleOnChange}
       />
-      <input
-        type="text"
+      <Input
         placeholder="Artist Name"
         name="artistName"
-        onChange={handleOnChange}
         required={true}
+        id="artistName"
+        handleOnChange={handleOnChange}
       />
       <Btn
         btnText="Search"
         isPrimary={true}
       />
-    </form>
+    </StyledForm>
   );
 };
 

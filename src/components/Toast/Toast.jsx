@@ -4,7 +4,7 @@ import { ToastContext } from '../../context/ToastContext'
 const Toast = () => {
   const {toastState} = useContext(ToastContext)
 
-  console.log(toastState);
+  //console.log(toastState);
 
   return (
     <div>{toastState.message}</div>

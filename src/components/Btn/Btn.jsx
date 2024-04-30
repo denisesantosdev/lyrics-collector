@@ -10,7 +10,6 @@ const StyledBtn = styled.button`
     cursor: pointer;
     font-weight: bold;
     border-radius: .3rem;
-    padding: 1rem 1.5rem ;
     transition: all .3s ease;
 
     &:hover, &:focus {
@@ -19,7 +18,7 @@ const StyledBtn = styled.button`
 `;
 
 const Btn = (props) => {
-  console.log(props);
+ // console.log(props);
   return (
     <StyledBtn
       $primary={props.isPrimary}
