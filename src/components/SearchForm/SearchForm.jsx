@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { fetchLyrics } from "../../services/lyrics-api";
 import { lyricsDataContext } from "../../context/LyricsDataContext";
 import { ToastContext } from "../../context/ToastContext";
+import Btn from "../Btn/Btn";
 
 const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState({});
@@ -86,7 +87,10 @@ const SearchForm = () => {
         onChange={handleOnChange}
         required={true}
       />
-      <button>Search</button>
+      <Btn
+        btnText="Search"
+        isPrimary={true}
+      />
     </form>
   );
 };

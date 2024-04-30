@@ -17,6 +17,7 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "../firebase/firebaseConfig";
+import { ThemeProvider } from "styled-components";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -42,14 +43,16 @@ function App() {
 
   return (
     <>
-      <GlobalStyle theme={lightTheme}/>
-      <ToastContextProvider>
-        <LyricsData>
-          {!isUserLoggedIn && <SignInPage />}
-          <Home isUserLoggedIn={isUserLoggedIn} />
-        </LyricsData>
-        <Toast />
-      </ToastContextProvider>
+      <ThemeProvider theme={lightTheme}>
+      <GlobalStyle />
+        <ToastContextProvider>
+          <LyricsData>
+            {!isUserLoggedIn && <SignInPage />}
+            <Home isUserLoggedIn={isUserLoggedIn} />
+          </LyricsData>
+          <Toast />
+        </ToastContextProvider>
+      </ThemeProvider>
     </>
   );
 }

@@ -25,32 +25,15 @@ const baseTheme = {
 const lightTheme = {
   ...baseTheme,
   colors: {
-    // Background colors
-    background: "#f9f9f9",
-    backgroundAccent: "#ffffff",
-
-    // Text colors
-    text: "#333333",
-    textLight: "#666666",
-
-    // Primary color (orange)
-    primary: "#f57c00",
-    primaryLight: "#ffab40",
-    primaryDark: "#e65100",
-
-    // Secondary color (teal)
-    secondary: "#009688",
-    secondaryLight: "#80cbc4",
-    secondaryDark: "#00796b",
-
-    // Border color
+    primary: "#f0f0f0", // Light gray for background
+    secondary: "#ffffff",
+    text: "#333333", // Dark gray for text
+    error: "#f28b82", // Pastel red for error state
+    warning: "#ffad47", // Pastel orange for warning state
+    success: "#a0d99b", // Pastel green for success state
+    //accent: "#8ecae6", // Soft pastel blue for accent color
+    accent: "#333333",
     border: "#333333",
-
-    // Other colors (optional)
-    accent: "#ff5722",
-    success: "#4caf50",
-    warning: "#ff9800",
-    error: "#f44336",
   },
 };
 
