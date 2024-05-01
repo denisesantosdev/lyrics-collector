@@ -11,6 +11,7 @@ const StyledBtn = styled.button`
     font-weight: bold;
     border-radius: .3rem;
     transition: all .3s ease;
+    padding: ${props=>props.theme.padding.large};
 
     &:hover, &:focus {
       transform: scale(1.1,1.1)
@@ -18,11 +19,10 @@ const StyledBtn = styled.button`
 `;
 
 const Btn = (props) => {
- // console.log(props);
+
   return (
     <StyledBtn
-      $primary={props.isPrimary}
-      onClick={() => props.handleOnClick()}>
+      $primary={props.isPrimary}>
       {props.btnText}
     </StyledBtn>
   );

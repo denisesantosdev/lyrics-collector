@@ -7,7 +7,7 @@ const baseTheme = {
     small: "0.875rem", // Small font size
     medium: "1rem", // Medium font size (default)
     large: "1.25rem", // Large font size
-    xLarge: "1.5rem", // Extra-large font size
+    xLarge: "2rem", // Extra-large font size
   },
   lineHeights: {
     small: "1.2", // Line height for small font size
@@ -20,6 +20,11 @@ const baseTheme = {
     medium: "1rem", // Medium spacing
     large: "2rem", // Large spacing
   },
+  padding: {
+    small: "0.5rem 1rem", // 0.5rem top and bottom, 1rem left and right
+
+    large: "1rem 2rem", // 1rem top and bottom, 2rem left and right
+  },
 };
 
 const lightTheme = {
@@ -27,11 +32,12 @@ const lightTheme = {
   colors: {
     primary: "#f0f0f0", // Light gray for background
     secondary: "#ffffff",
+    background: "#333333",
     text: "#333333", // Dark gray for text
     error: "#f28b82", // Pastel red for error state
     warning: "#ffad47", // Pastel orange for warning state
     success: "#a0d99b", // Pastel green for success state
-    accent: "#8ecae6", // Soft pastel blue for accent color
+    //accent: "#8ecae6", // Soft pastel blue for accent color
     accent: "#333333",
     border: "#333333",
   },

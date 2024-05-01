@@ -4,7 +4,7 @@ import { baseTheme } from "./themes";
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${(props) => props.theme.fonts.body};
-    background-color: ${(props) => props.theme.colors.background};
+    background-color: ${(props) => props.theme.colors.primary};
     overflow-x: hidden;
   }
 

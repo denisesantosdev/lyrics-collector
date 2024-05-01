@@ -1,33 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import { lyricsDataContext } from "../context/LyricsDataContext";
-import SavedLyrics from "../components/SavedLyrics/SavedLyrics"
+import SavedLyrics from "../components/SavedLyrics/SavedLyrics";
 import SongLyrics from "../components/SongLyrics/SongLyrics";
-import SignOutBtn from "../components/SignOutBtn/SignOutBtn"
+import SignOutBtn from "../components/SignOutBtn/SignOutBtn";
 import SearchForm from "../components/SearchForm/SearchForm";
+import Nav from "../components/Nav/Nav";
+import Header from "../components/Header/Header";
+import styled from "styled-components";
 
-const Home = ({isUserLoggedIn}) => {
-  const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
+const StyledHome = styled.div`
+  display: grid;
+  gap: 2rem;
+`;
 
-   return (
-    <>
-      <header>
-      {isUserLoggedIn ? (
-        <SignOutBtn/>
-      ) : (
-        <div>
-          <button>Sign In</button>
-          <button>Create account</button>
-        </div>
-      )}
-    </header>
-      <section>
-        <SearchForm/>
-        
-        {lyricsData ? <SongLyrics /> : <h1>Search for your favorite songs</h1>}
-      </section>
+const Home = ({ isUserLoggedIn }) => {
+  return (
+    <StyledHome>
+      {/* <header>
+        <p>Lyrics Collector</p>
+        {isUserLoggedIn ? <SignOutBtn /> : <Nav />}
+      </header> */}
 
-      {isUserLoggedIn && <SavedLyrics isUserLoggedIn={isUserLoggedIn}/>}
-    </>
+      <Header />
+      <SearchForm />
+      <SongLyrics />
+
+      {isUserLoggedIn && <SavedLyrics isUserLoggedIn={isUserLoggedIn} />}
+    </StyledHome>
   );
 };
 

@@ -104,6 +104,7 @@ function useAuth() {
     authSignInWithGoogle,
     authSignOut,
     authCheckAuthState,
+    isUserLoggedIn
   };
 }
 
