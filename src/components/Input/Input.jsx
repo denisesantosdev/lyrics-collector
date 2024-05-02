@@ -25,7 +25,7 @@ const Input = (props) => {
     <StyledInput>
       <label htmlFor={props.id}>{props.placeholder}</label>
       <input
-        type="text"
+        type={props.type}
         name={props.name}
         id={props.id}
         required={props.required}

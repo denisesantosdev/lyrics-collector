@@ -82,6 +82,7 @@ const SearchForm = () => {
   return (
     <StyledForm onSubmit={handleOnSubmit}>
       <Input
+      type='text'
         placeholder="Song Title"
         name="songTitle"
         required={true}

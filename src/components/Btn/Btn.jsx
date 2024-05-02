@@ -19,9 +19,10 @@ const StyledBtn = styled.button`
 `;
 
 const Btn = (props) => {
-
+//console.log(props);
   return (
     <StyledBtn
+      onClick={props.handleOnClick}
       $primary={props.isPrimary}>
       {props.btnText}
     </StyledBtn>

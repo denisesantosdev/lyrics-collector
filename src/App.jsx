@@ -50,6 +50,8 @@ function App() {
            {/*  {!isUserLoggedIn && <SignInPage />} */}
             <Home isUserLoggedIn={isUserLoggedIn} />
           </LyricsData>
+
+          <SignInPage/>
           <Toast />
         </ToastContextProvider>
       </ThemeProvider>
