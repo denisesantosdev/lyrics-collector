@@ -3,6 +3,7 @@ import { lyricsDataContext } from "../../context/LyricsDataContext";
 import useDatabase from "../../customHooks/useDatabase";
 import styled from "styled-components";
 import useAuth from "../../customHooks/useAuth";
+import { saveIcon, deleteIcon } from "../../theme/icons";
 
 const StyledLyrics = styled.div`
   color: ${(props) => props.theme.colors.text};
@@ -15,7 +16,7 @@ const StyledLyricsHeader = styled.header`
   gap: 1rem;
   margin-bottom: 2.5rem;
 
-  img {
+  > img {
     margin-bottom: 1rem;
     border-radius: .3rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -72,10 +73,12 @@ const SongLyrics = () => {
               {itemExists.itemStatus ? (
                 <button
                   onClick={() => deleteSongLyricFromDB(itemExists.itemInDB.id)}>
-                  Delete
+                  <img src={deleteIcon} alt="" />
                 </button>
               ) : (
-                <button onClick={() => saveLyricsToDB()}>Save</button>
+                <button onClick={() => saveLyricsToDB()}>
+                  <img src={saveIcon} alt="" />
+                </button>
               )}
             </div>
             <h2>{lyricsData.artistName}</h2>

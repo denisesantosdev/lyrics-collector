@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {deleteIcon,saveIcon} from '../../theme/icons'
 
 const StyledLyricsCard = styled.div`
   display: grid;
@@ -9,7 +10,7 @@ const StyledLyricsCard = styled.div`
   gap: 1rem;
   border-bottom: 1px solid gray;
   
-  img {
+  > img {
     width: 100px;
     border-radius: .3rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -44,7 +45,9 @@ const LyricsCard = ({item,deleteSongLyricFromDB}) => {
           <h2>{item.artistName}</h2>
         </div>
 
-        <button onClick={() => deleteSongLyricFromDB(item.id)}>Delete</button>
+        <button onClick={() => deleteSongLyricFromDB(item.id)}>
+          <img src={deleteIcon} alt="" />
+        </button>
       </StyledLyricsCard>
     </a>
   );

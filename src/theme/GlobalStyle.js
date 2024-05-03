@@ -9,6 +9,12 @@ const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme.colors.text};;
   }
 
+  button {
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+  }
+
 /* 
     CSS Reset by Andy Bell: https://piccalil.li/blog/a-more-modern-css-reset/
  */
