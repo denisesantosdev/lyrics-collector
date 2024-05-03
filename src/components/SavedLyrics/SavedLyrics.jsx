@@ -4,6 +4,17 @@ import { lyricsDataContext } from "../../context/LyricsDataContext";
 import SongLyrics from "../SongLyrics/SongLyrics";
 import useDatabase from "../../customHooks/useDatabase";
 import LyricsCard from "../LyricsCard/LyricsCard";
+import Select from "../Select/Select";
+import styled from "styled-components";
+
+const StyledSavedLyrics = styled.main`
+  display: grid;
+  gap: 1rem;
+
+  select {
+    justify-self: end;
+  }
+`
 
 const SavedLyrics = ({ isUserLoggedIn }) => {
   const { setLyricsData } = useContext(lyricsDataContext);
@@ -43,7 +54,7 @@ const SavedLyrics = ({ isUserLoggedIn }) => {
 
   useEffect(() => {
     if (isUserLoggedIn) {
-      // getAllLyricsFromDB()
+     getAllLyricsFromDB();
     }
   }, [isDbAltered]);
 
@@ -64,26 +75,31 @@ const SavedLyrics = ({ isUserLoggedIn }) => {
   function handleOnChange(event) {
     //console.log(event.target.value);
     const selectedArtist = event.target.value;
+    console.log(selectedArtist);
 
     filterByArtist(selectedArtist);
   }
 
-  return (
-    <div>
-      <button onClick={() => getAllLyricsFromDB()}>
-        Show all saved lyrics
-      </button>
 
-      <select
-        onChange={handleOnChange}
+  return (
+    <StyledSavedLyrics>
+      {/* <button onClick={() => getAllLyricsFromDB()}>
+        Show all saved lyrics
+      </button> */}
+
+      <Select
         name="artists"
-        id="artists">
-        <option value="all">All artists</option>
-        {renderFilterOptions()}
-      </select>
+        id="artists"
+        option={{
+          value: "all",
+          optionText: "All artists",
+        }}
+        handleOnChange={handleOnChange}
+        renderFilterOptions={renderFilterOptions}
+      />
 
       {renderSavedLyrics()}
-    </div>
+    </StyledSavedLyrics>
   );
 };
 

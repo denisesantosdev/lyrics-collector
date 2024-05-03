@@ -51,7 +51,7 @@ function App() {
             <Home isUserLoggedIn={isUserLoggedIn} />
           </LyricsData>
 
-          <SignInPage/>
+          {/* <SignInPage/> */}
           <Toast />
         </ToastContextProvider>
       </ThemeProvider>
