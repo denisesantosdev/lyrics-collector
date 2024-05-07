@@ -57,7 +57,7 @@ const SongLyrics = () => {
     if (lyricsData && isUserLoggedIn) {
       checkIfItemExistsInDB("albumImageUrl", lyricsData.albumImage);
     }
-  }, [isDbAltered]);
+  }, [isDbAltered, lyricsData]);
 
   return (
     <StyledLyrics>
@@ -73,11 +73,17 @@ const SongLyrics = () => {
               {itemExists.itemStatus ? (
                 <button
                   onClick={() => deleteSongLyricFromDB(itemExists.itemInDB.id)}>
-                  <img src={deleteIcon} alt="" />
+                  <img
+                    src={deleteIcon}
+                    alt=""
+                  />
                 </button>
               ) : (
                 <button onClick={() => saveLyricsToDB()}>
-                  <img src={saveIcon} alt="" />
+                  <img
+                    src={saveIcon}
+                    alt=""
+                  />
                 </button>
               )}
             </div>

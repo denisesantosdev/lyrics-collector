@@ -6,7 +6,7 @@ const ToastContextProvider = ({ children }) => {
   const [toastState, setToastState] = useState({
     visible: false,
     message: "",
-    type: "success",
+    type: "",
   });
 
   return (

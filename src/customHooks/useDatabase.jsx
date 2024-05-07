@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { firebaseConfig } from "../../firebase/firebaseConfig";
 import { lyricsDataContext } from "../context/LyricsDataContext";
+import { ToastContext } from "../context/ToastContext";
 
 import {
   getFirestore,
@@ -32,6 +33,7 @@ const useDatabase = () => {
     itemInDB: "",
     itemStatus: false,
   });
+  const {setToastState}=useContext(ToastContext)
 
   const collectionName = "lyrics";
   const lyricsRef = collection(db, collectionName);
@@ -49,12 +51,19 @@ const useDatabase = () => {
         id: docRef.id,
         albumImageUrl: lyricsData.albumImage,
       });
+
+      setToastState({
+        visible: true,
+        message:'Song added to collection!',
+        type:'success'
+      })
+      setIsDbAltered((prev) => !prev);
+      
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
 
-    setIsDbAltered((prev) => !prev);
   }
 
   async function checkIfItemExistsInDB(itemInDB, itemToCompare) {
@@ -118,6 +127,11 @@ const useDatabase = () => {
   async function deleteSongLyricFromDB(docId) {
     await deleteDoc(doc(db, collectionName, docId));
     setIsDbAltered((prev) => !prev);
+    setToastState({
+      visible: true,
+      message:'Song deleted from collection',
+      type:'success'
+    })
     console.log(isDbAltered);
   }
 

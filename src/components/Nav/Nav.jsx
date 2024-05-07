@@ -9,7 +9,7 @@ const StyledNav = styled.nav`
 
    ul {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     list-style-type: none;
     font-size: ${(props) => props.theme.fontSizes.small};
   }
