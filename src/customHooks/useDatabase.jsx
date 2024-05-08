@@ -54,14 +54,19 @@ const useDatabase = () => {
 
       setToastState({
         visible: true,
-        message:'Song added to collection!',
+        message:'Song added to collection',
         type:'success'
       })
       setIsDbAltered((prev) => !prev);
       
-      console.log("Document written with ID: ", docRef.id);
+      //console.log("Document written with ID: ", docRef.id);
     } catch (e) {
-      console.error("Error adding document: ", e);
+      //console.error("Error adding document: ", e);
+      setToastState({
+        visible: true,
+        message:'Oh-oh! An error has ocurred!',
+        type:'error'
+      })
     }
 
   }

@@ -56,7 +56,6 @@ const SearchForm = () => {
           });
 
           setFormIsSubmitted(false);
-          setSearchQuery({});
         } catch (err) {
           if (err.message === "404") {
             console.log("not found");

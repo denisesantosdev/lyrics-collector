@@ -31,13 +31,13 @@ function App() {
       // https://firebase.google.com/docs/reference/js/auth.user
       const uid = user.uid;
       // ...
-      console.log("user is logged in");
+      //console.log("user is logged in");
       setIsUserLoggedIn(true);
     } else {
       // User is signed out
       // ...
       setIsUserLoggedIn(false);
-      console.log("user is logged out");
+      //console.log("user is logged out");
     }
   });
 

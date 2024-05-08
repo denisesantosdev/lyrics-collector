@@ -16,12 +16,21 @@ function useAuth() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("Account created!!");
+        setToastState({
+          visible: true,
+          message:'Account created! Please login',
+          type:'success'
+        })
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error.message);
+        //console.log(error.message);
+        setToastState({
+          visible: true,
+          message:`Oh-oh! ${errorMessage}`,
+          type:'error'
+        })
       });
   };
 
@@ -31,13 +40,17 @@ function useAuth() {
         // Signed in
         const user = userCredential.user;
         // ...
-        console.log("You're now signed in");
+        //console.log("You're now signed in");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-
-        console.log(error.message);
+        setToastState({
+          visible: true,
+          message:`Oh-oh! ${errorMessage}`,
+          type:'error'
+        })
+        //console.log(error.message);
       });
   };
 
@@ -51,7 +64,7 @@ function useAuth() {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        console.log("Signed in with Google");
+        //console.log("Signed in with Google");
       })
       .catch((error) => {
         // Handle Errors here.
@@ -62,7 +75,12 @@ function useAuth() {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
-        console.log(error.message);
+        //console.log(error.message);
+        setToastState({
+          visible: true,
+          message:`Oh-oh! ${errorMessage}`,
+          type:'error'
+        })
       });
   };
 
@@ -85,13 +103,13 @@ function useAuth() {
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
         // ...
-        console.log("user is logged in");
+        //console.log("user is logged in");
         setIsUserLoggedIn(true);
       } else {
         // User is signed out
         // ...
         setIsUserLoggedIn(false);
-        console.log("user is logged out");
+        //console.log("user is logged out");
       }
     });
   };
