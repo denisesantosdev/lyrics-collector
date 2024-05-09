@@ -4,6 +4,8 @@ import useDatabase from "../../customHooks/useDatabase";
 import styled from "styled-components";
 import useAuth from "../../customHooks/useAuth";
 import { saveIcon, deleteIcon } from "../../theme/icons";
+import { useParams } from "react-router-dom";
+import useLyricsApi from "../../customHooks/useLyricsApi";
 
 const StyledLyrics = styled.div`
   color: ${(props) => props.theme.colors.text};
@@ -39,6 +41,12 @@ const StyledLyricsHeader = styled.header`
 `;
 
 const SongLyrics = () => {
+  const { songTitle, artistName } = useParams();
+
+  const { loading, error } = useLyricsApi(songTitle, artistName);
+
+  //console.log();
+
   const { lyricsData } = useContext(lyricsDataContext);
   const { authCheckAuthState, isUserLoggedIn } = useAuth();
   //console.log(lyricsData);
@@ -57,11 +65,47 @@ const SongLyrics = () => {
     if (lyricsData && isUserLoggedIn) {
       checkIfItemExistsInDB("albumImageUrl", lyricsData.albumImage);
     }
-  }, [isDbAltered, lyricsData]);
+  }, [isDbAltered, lyricsData, isUserLoggedIn]);
+
+  function renderBtn() {
+    if (isUserLoggedIn) {
+      if (itemExists.itemStatus) {
+        return (
+          <button onClick={() => deleteSongLyricFromDB(itemExists.itemInDB.id)}>
+            <img
+              src={deleteIcon}
+              alt=""
+            />
+          </button>
+        );
+      } else {
+        return (
+          <button onClick={() => saveLyricsToDB()}>
+            <img
+              src={saveIcon}
+              alt=""
+            />
+          </button>
+        );
+      }
+    }
+
+    return (
+      <button>
+        <img
+          src={saveIcon}
+          alt=""
+        />
+        login to save
+      </button>
+    );
+  }
 
   return (
     <StyledLyrics>
-      {lyricsData ? (
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
         <div>
           <StyledLyricsHeader>
             <img
@@ -70,29 +114,12 @@ const SongLyrics = () => {
             />
             <div>
               <h1>{lyricsData.songTitle}</h1>
-              {itemExists.itemStatus ? (
-                <button
-                  onClick={() => deleteSongLyricFromDB(itemExists.itemInDB.id)}>
-                  <img
-                    src={deleteIcon}
-                    alt=""
-                  />
-                </button>
-              ) : (
-                <button onClick={() => saveLyricsToDB()}>
-                  <img
-                    src={saveIcon}
-                    alt=""
-                  />
-                </button>
-              )}
+              {renderBtn()}
             </div>
             <h2>{lyricsData.artistName}</h2>
           </StyledLyricsHeader>
           <p style={{ whiteSpace: "pre-wrap" }}>{lyricsData.lyrics}</p>
         </div>
-      ) : (
-        <h1>Search for your favorite songs</h1>
       )}
     </StyledLyrics>
   );

@@ -18,6 +18,9 @@ import {
 import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "../firebase/firebaseConfig";
 import { ThemeProvider } from "styled-components";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Header from "./components/Header/Header";
+import SongLyrics from "./components/SongLyrics/SongLyrics";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -44,14 +47,28 @@ function App() {
   return (
     <>
       <ThemeProvider theme={lightTheme}>
-      <GlobalStyle />
+        <GlobalStyle />
         <ToastContextProvider>
           <LyricsData>
-           {/*  {!isUserLoggedIn && <SignInPage />} */}
-            <Home isUserLoggedIn={isUserLoggedIn} />
+            {/*  {!isUserLoggedIn && <SignInPage />} */}
+            <Header />
+
+            <Router>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Home />}
+                />
+                <Route
+                  path=":songTitle/:artistName"
+                  element={<SongLyrics />}
+                />
+              </Routes>
+            </Router>
+            {/*  <Home isUserLoggedIn={isUserLoggedIn} /> */}
           </LyricsData>
 
-          {/* <SignInPage/> */}
+           {/* <SignInPage/> */}
           <Toast />
         </ToastContextProvider>
       </ThemeProvider>

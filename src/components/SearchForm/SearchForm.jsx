@@ -1,28 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
-import { fetchLyrics } from "../../services/lyrics-api";
-import { lyricsDataContext } from "../../context/LyricsDataContext";
-import { ToastContext } from "../../context/ToastContext";
 import Btn from "../Btn/Btn";
 import Input from "../Input/Input";
 import styled from "styled-components";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const StyledForm = styled.form`
   display: grid;
   gap: 1rem;
   padding: 1rem;
-`
+`;
 
 const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState({});
-  const [formIsSubmitted, setFormIsSubmitted] = useState(false);
-
-  const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
-
-  const { setToastState } = useContext(ToastContext);
+  const navigate = useNavigate();
 
   function handleOnSubmit(event) {
     event.preventDefault();
-    setFormIsSubmitted(true);
+    navigate(`/${searchQuery.songTitle}/${searchQuery.artistName}`);
   }
 
   const handleOnChange = (event) => {
@@ -32,56 +26,12 @@ const SearchForm = () => {
     });
   };
 
-  //console.log(searchQuery);
-
-  useEffect(() => {
-    async function searchLyrics() {
-      if (formIsSubmitted) {
-        try {
-          const lyricsApiData = await fetchLyrics(
-            searchQuery.songTitle,
-            searchQuery.artistName
-          );
-
-          if (Object.keys(lyricsApiData).length === 0) {
-            throw new Error(404);
-          }
-
-          //console.log(lyricsApiData);
-          setLyricsData({
-            artistName: lyricsApiData.artist,
-            songTitle: lyricsApiData.title,
-            albumImage: lyricsApiData.image,
-            lyrics: lyricsApiData.lyrics,
-          });
-
-          setFormIsSubmitted(false);
-        } catch (err) {
-          if (err.message === "404") {
-            console.log("not found");
-            setToastState({
-              visible: true,
-              message: "oh-oh! Song or artist not found.",
-              type: "error",
-            });
-          } else {
-            setToastState({
-              visible: true,
-              message: "oh-oh! An error has ocurred.",
-              type: "error",
-            });
-          }
-        }
-      }
-    }
-
-    searchLyrics();
-  }, [formIsSubmitted]);
+  console.log(searchQuery);
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
       <Input
-      type='text'
+        type="text"
         placeholder="Song Title"
         name="songTitle"
         required={true}

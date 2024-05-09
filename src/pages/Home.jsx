@@ -21,9 +21,9 @@ const Home = ({ isUserLoggedIn }) => {
         {isUserLoggedIn ? <SignOutBtn /> : <Nav />}
       </header> */}
 
-      <Header />
+      {/* <Header /> */}
       <SearchForm />
-      <SongLyrics />
+      {/* <SongLyrics /> */}
 
       {isUserLoggedIn && <SavedLyrics isUserLoggedIn={isUserLoggedIn} />}
     </StyledHome>

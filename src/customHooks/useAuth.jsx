@@ -89,6 +89,7 @@ function useAuth() {
       .then(() => {
         // Sign-out successful.
         console.log("You're now logged out");
+        setIsUserLoggedIn(false)
       })
       .catch((error) => {
         // An error happened.
