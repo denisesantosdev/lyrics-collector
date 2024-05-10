@@ -6,6 +6,7 @@ import useDatabase from "../../customHooks/useDatabase";
 import LyricsCard from "../LyricsCard/LyricsCard";
 import Select from "../Select/Select";
 import styled from "styled-components";
+import useAuth from "../../customHooks/useAuth";
 
 const StyledSavedLyrics = styled.main`
   display: grid;
@@ -14,9 +15,9 @@ const StyledSavedLyrics = styled.main`
   select {
     justify-self: end;
   }
-`
+`;
 
-const SavedLyrics = ({ isUserLoggedIn }) => {
+const SavedLyrics = () => {
   const { setLyricsData } = useContext(lyricsDataContext);
 
   const {
@@ -27,6 +28,8 @@ const SavedLyrics = ({ isUserLoggedIn }) => {
     isDbAltered,
     filteredArtists,
   } = useDatabase();
+
+  const { authCheckAuthState, isUserLoggedIn } = useAuth();
 
   function renderSavedLyrics() {
     if (filteredArtists.length === 0) {
@@ -53,10 +56,12 @@ const SavedLyrics = ({ isUserLoggedIn }) => {
   }
 
   useEffect(() => {
+    authCheckAuthState();
+
     if (isUserLoggedIn) {
-     getAllLyricsFromDB();
+      getAllLyricsFromDB();
     }
-  }, [isDbAltered]);
+  }, [isDbAltered, isUserLoggedIn]);
 
   function renderFilterOptions() {
     const artistsNamesSet = new Set(savedLyrics.map((item) => item.artistName));
@@ -79,7 +84,6 @@ const SavedLyrics = ({ isUserLoggedIn }) => {
 
     filterByArtist(selectedArtist);
   }
-
 
   return (
     <StyledSavedLyrics>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledLogo = styled.p`
@@ -8,7 +9,7 @@ const StyledLogo = styled.p`
 
 const Logo = () => {
   return (
-    <StyledLogo>Lyrics Collector</StyledLogo>
+    <StyledLogo><Link to={'/'}>Lyrics Collector</Link></StyledLogo>
   )
 }
 

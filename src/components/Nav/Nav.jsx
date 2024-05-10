@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Link from "../Link/Link";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import useAuth from "../../customHooks/useAuth";
 import SignOutBtn from "../SignOutBtn/SignOutBtn";
@@ -26,17 +26,25 @@ const Nav = () => {
     <StyledNav>
       {isUserLoggedIn ? (
         <ul>
-          <li><a href="#"><img src={musicIcon} alt="" /></a></li>
-          <li><SignOutBtn /></li>
+          <li>
+            <Link to="saved">
+              <img
+                src={musicIcon}
+                alt=""
+              />
+            </Link>
+          </li>
+          <li>
+            <SignOutBtn />
+          </li>
         </ul>
-        
       ) : (
         <ul>
           <li>
-            <Link linkText="Sign In" />
+            <Link to={"login"}>Log In</Link>
           </li>
           <li>
-            <Link linkText="Create Account" />
+            <Link to={"login"}>Create Account</Link>
           </li>
         </ul>
       )}

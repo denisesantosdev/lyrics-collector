@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {deleteIcon,saveIcon} from '../../theme/icons'
+import { deleteIcon, saveIcon } from "../../theme/icons";
+import { Link, useNavigate } from "react-router-dom";
 
 const StyledLyricsCard = styled.div`
   display: grid;
@@ -9,6 +10,10 @@ const StyledLyricsCard = styled.div`
   align-items: center;
   gap: 1rem;
   border-bottom: 1px solid gray;
+
+  a {
+    cursor: pointer;
+  }
   
   > img {
     width: 100px;
@@ -16,40 +21,47 @@ const StyledLyricsCard = styled.div`
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   }
 
-  h1 {
-    font-size: ${props=>props.theme.fontSizes.large};
-    margin-bottom: .5rem;
+  p {
+    font-size: ${(props) => props.theme.fontSizes.large};
+    font-weight: bold;
   }
   
-  h2 {
-    font-size: ${props=>props.theme.fontSizes.medium};
-    opacity: 70%;
+  span {
+    font-size: ${(props) => props.theme.fontSizes.medium};
+    opacity: 80%;
     
   }
 
   button {
     justify-self: flex-end;
   }
-`
+`;
 
-const LyricsCard = ({item,deleteSongLyricFromDB}) => {
+const LyricsCard = ({ item, deleteSongLyricFromDB }) => {
+  const navigate = useNavigate();
+
+  function handleOnClick() {
+    navigate(`/${item.songTitle}/${item.artistName}`);
+  }
+
   return (
-    <a>
-      <StyledLyricsCard>
-        <img
-          src={item.albumImageUrl}
-          alt="album image"
-        />
-        <div>
-          <h1>{item.songTitle}</h1>
-          <h2>{item.artistName}</h2>
-        </div>
+    <StyledLyricsCard>
+      <img
+        src={item.albumImageUrl}
+        alt="album image"
+      />
+      <a onClick={() => handleOnClick()}>
+        <p>{item.songTitle}</p>
+        <span>{item.artistName}</span>
+      </a>
 
-        <button onClick={() => deleteSongLyricFromDB(item.id)}>
-          <img src={deleteIcon} alt="" />
-        </button>
-      </StyledLyricsCard>
-    </a>
+      <button onClick={() => deleteSongLyricFromDB(item.id)}>
+        <img
+          src={deleteIcon}
+          alt=""
+        />
+      </button>
+    </StyledLyricsCard>
   );
 };
 

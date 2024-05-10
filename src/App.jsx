@@ -21,6 +21,7 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from "./components/Header/Header";
 import SongLyrics from "./components/SongLyrics/SongLyrics";
+import SavedLyrics from "./components/SavedLyrics/SavedLyrics";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -51,9 +52,9 @@ function App() {
         <ToastContextProvider>
           <LyricsData>
             {/*  {!isUserLoggedIn && <SignInPage />} */}
-            <Header />
 
             <Router>
+              <Header />
               <Routes>
                 <Route
                   path="/"
@@ -63,12 +64,20 @@ function App() {
                   path=":songTitle/:artistName"
                   element={<SongLyrics />}
                 />
+                <Route
+                  path="saved"
+                  element={<SavedLyrics />}
+                />
+                {/* <Route
+                  path="login"
+                  element={<SignInPage />}
+                /> */}
               </Routes>
             </Router>
             {/*  <Home isUserLoggedIn={isUserLoggedIn} /> */}
           </LyricsData>
 
-           {/* <SignInPage/> */}
+          {/* <SignInPage/> */}
           <Toast />
         </ToastContextProvider>
       </ThemeProvider>
