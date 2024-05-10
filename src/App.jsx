@@ -68,16 +68,16 @@ function App() {
                   path="saved"
                   element={<SavedLyrics />}
                 />
-                {/* <Route
+                <Route
                   path="login"
                   element={<SignInPage />}
-                /> */}
+                />
               </Routes>
             </Router>
             {/*  <Home isUserLoggedIn={isUserLoggedIn} /> */}
           </LyricsData>
 
-          {/* <SignInPage/> */}
+          {/* {<SignInPage/>} */}
           <Toast />
         </ToastContextProvider>
       </ThemeProvider>

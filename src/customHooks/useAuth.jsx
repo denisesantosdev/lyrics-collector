@@ -7,10 +7,12 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function useAuth() {
   const [user, setUser] = useState({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const navigate = useNavigate()
 
   const authCreateAccountWithEmail = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -21,6 +23,8 @@ function useAuth() {
           message:'Account created! Please login',
           type:'success'
         })
+
+        navigate('/')
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -41,6 +45,7 @@ function useAuth() {
         const user = userCredential.user;
         // ...
         //console.log("You're now signed in");
+        navigate('/')
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -65,6 +70,7 @@ function useAuth() {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         //console.log("Signed in with Google");
+        navigate('/')
       })
       .catch((error) => {
         // Handle Errors here.

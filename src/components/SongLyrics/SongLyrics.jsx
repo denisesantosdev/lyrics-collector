@@ -4,7 +4,7 @@ import useDatabase from "../../customHooks/useDatabase";
 import styled from "styled-components";
 import useAuth from "../../customHooks/useAuth";
 import { saveIcon, deleteIcon } from "../../theme/icons";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useLyricsApi from "../../customHooks/useLyricsApi";
 
 const StyledLyrics = styled.div`
@@ -91,13 +91,12 @@ const SongLyrics = () => {
     }
 
     return (
-      <button>
+      <Link to={'/login'}>
         <img
           src={saveIcon}
           alt=""
         />
-        login to save
-      </button>
+      </Link>
     );
   }
 
