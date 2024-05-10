@@ -26,7 +26,7 @@ const SearchForm = () => {
     });
   };
 
-  console.log(searchQuery);
+  //console.log(searchQuery);
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>

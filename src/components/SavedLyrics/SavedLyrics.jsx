@@ -80,7 +80,6 @@ const SavedLyrics = () => {
   function handleOnChange(event) {
     //console.log(event.target.value);
     const selectedArtist = event.target.value;
-    console.log(selectedArtist);
 
     filterByArtist(selectedArtist);
   }
