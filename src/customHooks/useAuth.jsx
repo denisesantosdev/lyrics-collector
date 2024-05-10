@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { auth, provider } from "../../firebase/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
@@ -8,11 +8,13 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { ToastContext } from "../context/ToastContext";
 
 function useAuth() {
   const [user, setUser] = useState({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { setToastState } = useContext(ToastContext);
 
   const authCreateAccountWithEmail = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -20,21 +22,22 @@ function useAuth() {
         const user = userCredential.user;
         setToastState({
           visible: true,
-          message:'Account created! Please login',
-          type:'success'
-        })
+          message: "Account created successfully!",
+          type: "success",
+        });
 
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        //console.log(error.message);
         setToastState({
           visible: true,
-          message:`Oh-oh! ${errorMessage}`,
-          type:'error'
-        })
+          message: `${handleErrorCode(errorCode)}`,
+          type: "error",
+        });
+
+        handleErrorCode(errorCode);
       });
   };
 
@@ -45,16 +48,16 @@ function useAuth() {
         const user = userCredential.user;
         // ...
         //console.log("You're now signed in");
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setToastState({
           visible: true,
-          message:`Oh-oh! ${errorMessage}`,
-          type:'error'
-        })
+          message: `${handleErrorCode(errorCode)}`,
+          type: "error",
+        });
         //console.log(error.message);
       });
   };
@@ -70,7 +73,7 @@ function useAuth() {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         //console.log("Signed in with Google");
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         // Handle Errors here.
@@ -84,9 +87,9 @@ function useAuth() {
         //console.log(error.message);
         setToastState({
           visible: true,
-          message:`Oh-oh! ${errorMessage}`,
-          type:'error'
-        })
+          message: `${handleErrorCode(errorCode)}`,
+          type: "error",
+        });
       });
   };
 
@@ -94,12 +97,16 @@ function useAuth() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        console.log("You're now logged out");
-        setIsUserLoggedIn(false)
+        //console.log("You're now logged out");
+        setIsUserLoggedIn(false);
       })
       .catch((error) => {
         // An error happened.
-        console.log(error.message);
+        setToastState({
+          visible: true,
+          message: `${handleErrorCode(errorCode)}`,
+          type: "error",
+        });
       });
   };
 
@@ -121,6 +128,18 @@ function useAuth() {
     });
   };
 
+  function handleErrorCode(errorCode) {
+    let message;
+
+    if (errorCode.startsWith("auth")) {
+      message = errorCode.slice(5, errorCode.length);
+    } else {
+      return "An error ocurred";
+    }
+
+    return message.replaceAll(/-/g, " ").toUpperCase();
+  }
+
   return {
     user,
     setUser,
@@ -129,7 +148,7 @@ function useAuth() {
     authSignInWithGoogle,
     authSignOut,
     authCheckAuthState,
-    isUserLoggedIn
+    isUserLoggedIn,
   };
 }
 

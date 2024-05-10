@@ -24,7 +24,6 @@ const StyledToast = styled.div`
   gap: 1rem;
 
   & p {
-    font-weight: bold;
     color: black;
   }
 `;
