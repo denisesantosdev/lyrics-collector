@@ -6,6 +6,7 @@ import useAuth from "../../customHooks/useAuth";
 import { saveIcon, deleteIcon } from "../../theme/icons";
 import { Link, useParams } from "react-router-dom";
 import useLyricsApi from "../../customHooks/useLyricsApi";
+import { ToastContext } from "../../context/ToastContext";
 
 const StyledLyrics = styled.div`
   color: ${(props) => props.theme.colors.text};
@@ -42,7 +43,7 @@ const StyledLyricsHeader = styled.header`
 
 const SongLyrics = () => {
   const { songTitle, artistName } = useParams();
-
+  const { setToastState } = useContext(ToastContext);
   const { loading, error } = useLyricsApi(songTitle, artistName);
 
   //console.log();
@@ -91,12 +92,19 @@ const SongLyrics = () => {
     }
 
     return (
-      <Link to={'/login'}>
+      <button
+        onClick={() => {
+          setToastState({
+            visible: true,
+            message: "Login or create an account to save!",
+            type: "warning",
+          });
+        }}>
         <img
           src={saveIcon}
           alt=""
         />
-      </Link>
+      </button>
     );
   }
 

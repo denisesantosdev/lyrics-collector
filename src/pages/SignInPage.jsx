@@ -4,6 +4,7 @@ import Input from "../components/Input/Input";
 import Btn from "../components/Btn/Btn";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { returnArrow } from "../theme/icons";
 
 const StyledWrapper = styled.section`
   position: absolute;
@@ -55,7 +56,9 @@ const SignInPage = () => {
     <StyledWrapper>
       <div>
         <StyledSignInForm>
-        <Link to={'/'}>Back</Link>
+        <Link to={'/'}>
+          <img src={returnArrow} alt="" />
+        </Link>
         <h1>Sign in and save your favorite lyrics!</h1>
           <Input
             type="email"
