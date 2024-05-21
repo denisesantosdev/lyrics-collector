@@ -8,13 +8,22 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     place-items: center;
     padding: 1rem;
+    margin-bottom: 3rem;
+   
+    @media (min-width: 1024px) {
+      max-width: 1024px;
+      margin-inline: auto;
+    }
+  
 `;
+
+
 
 const Header = () => {
   return (
     <StyledHeader>
-      <Logo />
-      <Nav />
+        <Logo />
+        <Nav />
     </StyledHeader>
   );
 };

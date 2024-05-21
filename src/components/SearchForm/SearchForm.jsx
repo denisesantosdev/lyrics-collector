@@ -5,9 +5,15 @@ import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const StyledForm = styled.form`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+
+  @media (min-width: 700px) {
+     flex-direction: row;
+     justify-content: center;
+  }
 `;
 
 const SearchForm = () => {

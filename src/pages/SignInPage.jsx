@@ -21,13 +21,20 @@ const StyledWrapper = styled.section`
 
 const StyledBg = styled.div`
   width: 100%;
-  background-image: url(${doodles});
+  background: 
+        linear-gradient(to top, ${props=>props.theme.colors.primary}, transparent 90%), 
+        url(${doodles});
   background-size: cover;
   background-repeat: no-repeat;
   order: -1;
 
   @media (min-width: 1024px) {
      order: 0;
+     background: 
+        linear-gradient(to right, ${props=>props.theme.colors.primary}, transparent 90%), 
+        url(${doodles});
+        background-size: cover;
+        background-repeat: no-repeat;
   }
 `;
 

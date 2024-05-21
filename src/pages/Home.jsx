@@ -7,6 +7,7 @@ import SearchForm from "../components/SearchForm/SearchForm";
 import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
 import styled from "styled-components";
+import PageBg from "../components/Pagebg/PageBg";
 
 const StyledHome = styled.div`
   display: grid;
@@ -23,6 +24,7 @@ const Home = ({ isUserLoggedIn }) => {
 
       {/* <Header /> */}
       <SearchForm />
+      <PageBg/>
       {/* <SongLyrics /> */}
 
       {isUserLoggedIn && <SavedLyrics isUserLoggedIn={isUserLoggedIn} />}

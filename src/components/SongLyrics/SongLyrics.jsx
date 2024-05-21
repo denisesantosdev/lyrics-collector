@@ -7,22 +7,41 @@ import { saveIcon, deleteIcon } from "../../theme/icons";
 import { Link, useParams } from "react-router-dom";
 import useLyricsApi from "../../customHooks/useLyricsApi";
 import { ToastContext } from "../../context/ToastContext";
+import PageBg from "../Pagebg/PageBg";
 
 const StyledLyrics = styled.div`
   color: ${(props) => props.theme.colors.text};
   text-align: center;
   padding: 1rem;
+
+  > div {
+    max-width: 700px;
+    margin-inline: auto;
+    padding: 1rem;
+    background-color: ${(props) => props.theme.colors.primary};
+  }
+
+  @media (min-width: 1024px) {
+      max-width: 1024px;
+      margin-inline: auto;
+    }
 `;
 
 const StyledLyricsHeader = styled.header`
   display: grid;
-  gap: 1rem;
+  gap: 2rem;
   margin-bottom: 2.5rem;
 
   > img {
+    
     margin-bottom: 1rem;
     border-radius: .3rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+    @media (min-width: 400px) {
+      max-width: 300px;
+      margin: auto;
+    }
   }
 
   div{
@@ -109,26 +128,30 @@ const SongLyrics = () => {
   }
 
   return (
-    <StyledLyrics>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <StyledLyricsHeader>
-            <img
-              src={lyricsData.albumImage}
-              alt=""
-            />
-            <div>
-              <h1>{lyricsData.songTitle}</h1>
-              {renderBtn()}
-            </div>
-            <h2>{lyricsData.artistName}</h2>
-          </StyledLyricsHeader>
-          <p style={{ whiteSpace: "pre-wrap" }}>{lyricsData.lyrics}</p>
-        </div>
-      )}
-    </StyledLyrics>
+    <>
+      <StyledLyrics>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            <StyledLyricsHeader>
+              <img
+                src={lyricsData.albumImage}
+                alt=""
+              />
+              <div>
+                <h1>{lyricsData.songTitle}</h1>
+                {renderBtn()}
+              </div>
+              <h2>{lyricsData.artistName}</h2>
+            </StyledLyricsHeader>
+            <p style={{ whiteSpace: "pre-wrap" }}>{lyricsData.lyrics}</p>
+          </div>
+        )}
+      </StyledLyrics>
+
+      <PageBg />
+    </>
   );
 };
 

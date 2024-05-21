@@ -7,10 +7,17 @@ import LyricsCard from "../LyricsCard/LyricsCard";
 import Select from "../Select/Select";
 import styled from "styled-components";
 import useAuth from "../../customHooks/useAuth";
+import PageBg from "../Pagebg/PageBg";
 
 const StyledSavedLyrics = styled.main`
   display: grid;
   gap: 1rem;
+  background-color: ${props=>props.theme.colors.primary};
+
+  @media (min-width: 700px) {
+      max-width: 700px;
+      margin-inline: auto;
+    }
 
   select {
     justify-self: end;
@@ -85,24 +92,26 @@ const SavedLyrics = () => {
   }
 
   return (
-    <StyledSavedLyrics>
-      {/* <button onClick={() => getAllLyricsFromDB()}>
-        Show all saved lyrics
-      </button> */}
+    <>
+      <StyledSavedLyrics>
+        {/* <button onClick={() => getAllLyricsFromDB()}>
+          Show all saved lyrics
+        </button> */}
+        <Select
+          name="artists"
+          id="artists"
+          option={{
+            value: "all",
+            optionText: "All artists",
+          }}
+          handleOnChange={handleOnChange}
+          renderFilterOptions={renderFilterOptions}
+        />
+        {renderSavedLyrics()}
+      </StyledSavedLyrics>
 
-      <Select
-        name="artists"
-        id="artists"
-        option={{
-          value: "all",
-          optionText: "All artists",
-        }}
-        handleOnChange={handleOnChange}
-        renderFilterOptions={renderFilterOptions}
-      />
-
-      {renderSavedLyrics()}
-    </StyledSavedLyrics>
+      <PageBg/>
+    </>
   );
 };
 
