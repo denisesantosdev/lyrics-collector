@@ -8,6 +8,7 @@ import successIcon from "../assets/images/smiley-thumbs-up.svg";
 import errorIcon from "../assets/images/smiley-in-trouble.svg";
 import closeIcon from "../assets/images/form-validation-remove-square.svg";
 import returnArrow from "../assets/images/keyboard-arrow-return.svg";
+import logoIcon from "../assets/images/playlist-menu.svg";
 
 export {
   saveIcon,
@@ -19,4 +20,5 @@ export {
   errorIcon,
   closeIcon,
   returnArrow,
+  logoIcon
 };

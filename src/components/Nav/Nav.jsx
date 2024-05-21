@@ -15,6 +15,15 @@ const StyledNav = styled.nav`
   }
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${props=>props.theme.colors.text};
+  &:hover {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+`;
+
 const Nav = () => {
   const { authCheckAuthState, isUserLoggedIn } = useAuth();
 
@@ -27,12 +36,12 @@ const Nav = () => {
       {isUserLoggedIn ? (
         <ul>
           <li>
-            <Link to="saved">
+            <StyledLink to="saved">
               <img
                 src={musicIcon}
                 alt=""
               />
-            </Link>
+            </StyledLink>
           </li>
           <li>
             <SignOutBtn />
@@ -41,10 +50,10 @@ const Nav = () => {
       ) : (
         <ul>
           <li>
-            <Link to={"login"}>Log In</Link>
+            <StyledLink to={"login"}>Log In</StyledLink>
           </li>
           <li>
-            <Link to={"login"}>Create Account</Link>
+            <StyledLink to={"login"}>Create Account</StyledLink>
           </li>
         </ul>
       )}
