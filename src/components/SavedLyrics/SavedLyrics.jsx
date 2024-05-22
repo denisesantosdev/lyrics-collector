@@ -12,7 +12,7 @@ import PageBg from "../Pagebg/PageBg";
 const StyledSavedLyrics = styled.main`
   display: grid;
   gap: 1rem;
-  background-color: ${props=>props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.primary};
 
   @media (min-width: 700px) {
       max-width: 700px;
@@ -21,6 +21,10 @@ const StyledSavedLyrics = styled.main`
 
   select {
     justify-self: end;
+  }
+
+  > h1 {
+    text-align: center;
   }
 `;
 
@@ -97,20 +101,28 @@ const SavedLyrics = () => {
         {/* <button onClick={() => getAllLyricsFromDB()}>
           Show all saved lyrics
         </button> */}
-        <Select
-          name="artists"
-          id="artists"
-          option={{
-            value: "all",
-            optionText: "All artists",
-          }}
-          handleOnChange={handleOnChange}
-          renderFilterOptions={renderFilterOptions}
-        />
-        {renderSavedLyrics()}
+        {savedLyrics.length === 0 ? (
+          <h1>Your saved lyrics will be shown here</h1>
+        ) : (
+          <>
+            <Select
+              name="artists"
+              id="artists"
+              option={{
+                value: "all",
+                optionText: "All artists",
+              }}
+              handleOnChange={handleOnChange}
+              renderFilterOptions={renderFilterOptions}
+            />
+            {renderSavedLyrics()}
+          </>
+        )}
+
+        {}
       </StyledSavedLyrics>
 
-      <PageBg/>
+      <PageBg />
     </>
   );
 };

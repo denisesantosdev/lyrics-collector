@@ -8,15 +8,24 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ToastContext } from "../context/ToastContext";
 
 function useAuth() {
   const [user, setUser] = useState({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const navigate = useNavigate();
   const { setToastState } = useContext(ToastContext);
+  const navigate = useNavigate();
+  const location = useLocation()
 
+  function redirectAfterLogin() {
+    if(location.key) {
+      navigate(-1)
+    } else {
+      navigate('/')
+    }
+  }
+  
   const authCreateAccountWithEmail = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -27,7 +36,7 @@ function useAuth() {
           type: "success",
         });
 
-        navigate("/");
+        redirectAfterLogin()
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -49,7 +58,8 @@ function useAuth() {
         const user = userCredential.user;
         // ...
         //console.log("You're now signed in");
-        navigate("/");
+        redirectAfterLogin()
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -66,7 +76,6 @@ function useAuth() {
   const authSignInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result);
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -75,7 +84,8 @@ function useAuth() {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         //console.log("Signed in with Google");
-        navigate("/");
+        redirectAfterLogin()
+
       })
       .catch((error) => {
         // Handle Errors here.
