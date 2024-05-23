@@ -13,7 +13,7 @@ const StyledInput = styled.div`
   input {
     border: 2px solid ${(props) => props.theme.colors.border};
     border-radius: .3rem;
-    background-color: inherit;
+    background-color: ${(props) => props.theme.colors.primary};
     padding: ${props=>props.theme.padding.small};
 
   }

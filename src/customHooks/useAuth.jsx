@@ -111,6 +111,11 @@ function useAuth() {
         // Sign-out successful.
         //console.log("You're now logged out");
         setIsUserLoggedIn(false);
+        setToastState({
+          visible: true,
+          message: `You are now logged out`,
+          type: "success",
+        });
       })
       .catch((error) => {
         // An error happened.

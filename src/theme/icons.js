@@ -9,6 +9,7 @@ import errorIcon from "../assets/images/smiley-in-trouble.svg";
 import closeIcon from "../assets/images/form-validation-remove-square.svg";
 import returnArrow from "../assets/images/keyboard-arrow-return.svg";
 import logoIcon from "../assets/images/playlist-menu.svg";
+import menuBtnIcon from "../assets/images/menu-navigation-2.svg";
 
 export {
   saveIcon,
@@ -20,5 +21,6 @@ export {
   errorIcon,
   closeIcon,
   returnArrow,
-  logoIcon
+  logoIcon,
+  menuBtnIcon
 };
