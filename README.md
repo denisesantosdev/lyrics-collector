@@ -1,8 +1,31 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Lyrics Collector
 
-Currently, two official plugins are available:
+Lyrics Collector is a website designed for music enthusiasts who love to explore and save song lyrics. The platform offers an intuitive search functionality that allows users to quickly find lyrics from a vast database covering various genres and artists. By creating an account, users can personalize their experience by saving their favorite lyrics to a custom list, making it easy to revisit and share their top picks.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[https://lyrics-collector.netlify.app/](https://lyrics-collector.netlify.app/)
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## Stack utilizada
+
+* React
+* Styled Components
+* React Router Dom
+* Account creation and Login with Firebase
+* Database with firestore
+
+
+## Roadmap
+
+* Add Typescript
+* Add testing
+* Improve design
+
+
+## Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/denisesantosdev/)
+
