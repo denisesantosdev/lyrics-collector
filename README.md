@@ -6,8 +6,8 @@ Lyrics Collector is a website designed for music enthusiasts who love to explore
 [https://lyrics-collector.netlify.app/](https://lyrics-collector.netlify.app/)
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](screenshots/desktop.png)
+![App Screenshot](screenshots/mobile.png)
 
 
 ## Stack utilizada
