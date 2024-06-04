@@ -10,7 +10,7 @@ Lyrics Collector is a website designed for music enthusiasts who love to explore
 ![App Screenshot](screenshots/mobile.png)
 
 
-## Stack utilizada
+## Stack 
 
 * React
 * Styled Components
