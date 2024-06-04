@@ -83,7 +83,7 @@ const SongLyrics = () => {
     authCheckAuthState();
 
     if (lyricsData && isUserLoggedIn) {
-      checkIfItemExistsInDB("albumImageUrl", lyricsData.albumImage);
+      checkIfItemExistsInDB("songTitle", lyricsData.songTitle);
     }
   }, [isDbAltered, lyricsData, isUserLoggedIn]);
 

@@ -33,7 +33,7 @@ const useDatabase = () => {
     itemInDB: "",
     itemStatus: false,
   });
-  const {setToastState}=useContext(ToastContext)
+  const { setToastState } = useContext(ToastContext);
 
   const collectionName = "lyrics";
   const lyricsRef = collection(db, collectionName);
@@ -54,21 +54,20 @@ const useDatabase = () => {
 
       setToastState({
         visible: true,
-        message:'Song added to collection',
-        type:'success'
-      })
+        message: "Song added to collection",
+        type: "success",
+      });
       setIsDbAltered((prev) => !prev);
-      
+
       //console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       //console.error("Error adding document: ", e);
       setToastState({
         visible: true,
-        message:'Oh-oh! An error has ocurred!',
-        type:'error'
-      })
+        message: "Oh-oh! An error has ocurred!",
+        type: "error",
+      });
     }
-
   }
 
   async function checkIfItemExistsInDB(itemInDB, itemToCompare) {
@@ -134,9 +133,9 @@ const useDatabase = () => {
     setIsDbAltered((prev) => !prev);
     setToastState({
       visible: true,
-      message:'Song deleted from collection',
-      type:'success'
-    })
+      message: "Song deleted from collection",
+      type: "success",
+    });
     console.log(isDbAltered);
   }
 
