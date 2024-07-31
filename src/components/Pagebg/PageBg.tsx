@@ -1,5 +1,4 @@
-import React from "react";
-import { doodles } from "../../theme/images";
+import { doodles } from "@styles/images";
 import styled from "styled-components";
 
 const StyledPageBg = styled.div`

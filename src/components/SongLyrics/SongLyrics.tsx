@@ -1,13 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { lyricsDataContext } from "../../context/LyricsDataContext";
-import useDatabase from "../../customHooks/useDatabase";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import useAuth from "../../customHooks/useAuth";
-import { saveIcon, deleteIcon } from "../../theme/icons";
-import { Link, useParams } from "react-router-dom";
-import useLyricsApi from "../../customHooks/useLyricsApi";
-import { ToastContext } from "../../context/ToastContext";
-import PageBg from "../Pagebg/PageBg";
+import { useParams } from "react-router-dom";
+
+import useDatabase from "@hooks/useDatabase";
+import useAuth from "@hooks/useAuth";
+import useLyricsApi from "@hooks/useLyricsApi";
+
+import { saveIcon, deleteIcon } from "@styles/icons";
+
+import { lyricsDataContext } from "@context/LyricsDataContext";
+import { ToastContext } from "@context/ToastContext";
+
+import PageBg from "@components/Pagebg/PageBg";
 
 const StyledLyrics = styled.div`
   color: ${(props) => props.theme.colors.text};

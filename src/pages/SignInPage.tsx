@@ -1,11 +1,13 @@
-import React from "react";
-import useAuth from "../customHooks/useAuth";
-import Input from "../components/Input/Input";
-import Btn from "../components/Btn/Btn";
 import styled from "styled-components";
+import useAuth from "../customHooks/useAuth";
+
+import Input from "@components/Input/Input";
+import Btn from "@components/Btn/Btn";
+
 import { Link } from "react-router-dom";
-import { returnArrow } from "../theme/icons";
-import { doodles } from "../theme/images";
+
+import { returnArrow } from "@styles/icons";
+import { doodles } from "@styles/images";
 
 const StyledWrapper = styled.section`
   position: absolute;

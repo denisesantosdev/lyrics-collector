@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-
-import { lyricsDataContext } from "../../context/LyricsDataContext";
-import SongLyrics from "../SongLyrics/SongLyrics";
-import useDatabase from "../../customHooks/useDatabase";
-import LyricsCard from "../LyricsCard/LyricsCard";
-import Select from "../Select/Select";
+import  { useContext, useEffect } from "react";
 import styled from "styled-components";
-import useAuth from "../../customHooks/useAuth";
-import PageBg from "../Pagebg/PageBg";
+
+import SongLyrics from "@components/SongLyrics/SongLyrics";
+import LyricsCard from "@components/LyricsCard/LyricsCard";
+import Select from "@components/Select/Select";
+import PageBg from "@components/Pagebg/PageBg";
+
+import { lyricsDataContext } from "@context/LyricsDataContext";
+
+import useDatabase from "@hooks/useDatabase";
+import useAuth from "@hooks/useAuth";
 
 const StyledSavedLyrics = styled.main`
   display: grid;

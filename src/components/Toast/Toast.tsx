@@ -1,12 +1,14 @@
-import React, { useCallback, useContext, useEffect } from "react";
-import { ToastContext } from "../../context/ToastContext";
+import  {  useContext } from "react";
 import styled from "styled-components";
+
+import { ToastContext } from "@context/ToastContext";
+
 import {
   alertIcon,
   errorIcon,
   successIcon,
   closeIcon,
-} from "../../theme/icons";
+} from "@styles/icons";
 
 const StyledToast = styled.div`
   position: fixed;

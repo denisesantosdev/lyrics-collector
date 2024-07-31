@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import useAuth from "../../customHooks/useAuth";
-import SignOutBtn from "../SignOutBtn/SignOutBtn";
-import { musicIcon } from "../../theme/icons";
+
+import useAuth from "@hooks/useAuth";
+
+import SignOutBtn from "@components/SignOutBtn/SignOutBtn";
+
+import { musicIcon } from "@styles/icons";
 
 const StyledNav = styled.nav`
 

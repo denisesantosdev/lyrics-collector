@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import Home from "@pages/Home";
-import Toast from "@components/Toast/Toast";
 import SignInPage from "@pages/SignInPage";
+
+import Toast from "@components/Toast/Toast";
 import Header from "@components/Header/Header";
 import SongLyrics from "@components/SongLyrics/SongLyrics";
 import SavedLyrics from "@components/SavedLyrics/SavedLyrics";

@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import Btn from "../Btn/Btn";
-import Input from "../Input/Input";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Navigate, useNavigate } from "react-router-dom";
+
+import Btn from "@components/Btn/Btn";
+import Input from "@components/Input/Input";
 
 const StyledForm = styled.form`
   display: flex;

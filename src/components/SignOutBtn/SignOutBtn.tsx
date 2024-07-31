@@ -1,7 +1,8 @@
-import React from "react";
-import useAuth from "../../customHooks/useAuth";
-import { logoutIcon } from "../../theme/icons";
 import { Link } from "react-router-dom";
+
+import useAuth from "@hooks/useAuth";
+
+import { logoutIcon } from "@styles/icons";
 
 const SignOutBtn = ({setMenuIsClosed}) => {
   const { authSignOut } = useAuth();

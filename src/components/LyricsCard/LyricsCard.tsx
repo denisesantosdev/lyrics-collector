@@ -1,7 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import { deleteIcon, saveIcon } from "../../theme/icons";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+
+import { deleteIcon } from "@styles/icons";
 
 const StyledLyricsCard = styled.div`
   display: grid;
