@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Btn from "@components/Btn/Btn";
 import Input from "@components/Input/Input";
 
+import { searchQueryInterface } from "models/interfaces";
+
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -18,22 +20,24 @@ const StyledForm = styled.form`
 `;
 
 const SearchForm = () => {
-  const [searchQuery, setSearchQuery] = useState({});
+  const [searchQuery, setSearchQuery] = useState<searchQueryInterface>({
+    artistName: "",
+    songTitle: "",
+  });
+
   const navigate = useNavigate();
 
-  function handleOnSubmit(event) {
+  function handleOnSubmit(event: any) {
     event.preventDefault();
     navigate(`/${searchQuery.songTitle}/${searchQuery.artistName}`);
   }
 
-  const handleOnChange = (event) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery({
       ...searchQuery,
       [event.target.name]: event.target.value,
     });
   };
-
-  //console.log(searchQuery);
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
@@ -46,6 +50,7 @@ const SearchForm = () => {
         handleOnChange={handleOnChange}
       />
       <Input
+        type="text"
         placeholder="Artist Name"
         name="artistName"
         required={true}

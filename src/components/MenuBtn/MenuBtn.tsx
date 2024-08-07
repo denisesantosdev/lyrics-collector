@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { menuBtnIcon, closeIcon } from "@styles/icons";
+import { menuStateType } from "@models/types";
 
 const StyledBtn = styled.button`
     @media (min-width: 500px) {
@@ -7,7 +8,10 @@ const StyledBtn = styled.button`
     }
 `;
 
-const MenuBtn = ({ setMenuIsClosed, menuIsClosed }) => {
+const MenuBtn: React.FC<menuStateType> = ({
+  setMenuIsClosed,
+  menuIsClosed,
+}) => {
   return (
     <StyledBtn onClick={() => setMenuIsClosed((prev) => !prev)}>
       {menuIsClosed ? (

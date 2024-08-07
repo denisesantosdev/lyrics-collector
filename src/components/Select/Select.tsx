@@ -6,16 +6,22 @@ const StyledSelect = styled.select`
     border: none;
     font-weight: bold;
     border-bottom: 2px solid ${(props) => props.theme.colors.border};
-`
+`;
 
-const Select = (props) => {
+interface SelectProps {
+  name: string;
+  id: string;
+  option: { value: string; optionText: string };
+  handleOnChange: React.ChangeEventHandler<HTMLSelectElement>;
+  renderFilterOptions: Function;
+}
 
+const Select: React.FC<SelectProps> = (props) => {
   return (
     <StyledSelect
       name={props.name}
       id={props.id}
-      onChange={props.handleOnChange}
-      >
+      onChange={props.handleOnChange}>
       <option value={props.option.value}>{props.option.optionText}</option>
       {props.renderFilterOptions()}
     </StyledSelect>

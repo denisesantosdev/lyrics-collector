@@ -1,12 +1,9 @@
 import  { useContext, useEffect } from "react";
 import styled from "styled-components";
 
-import SongLyrics from "@components/SongLyrics/SongLyrics";
 import LyricsCard from "@components/LyricsCard/LyricsCard";
 import Select from "@components/Select/Select";
 import PageBg from "@components/Pagebg/PageBg";
-
-import { lyricsDataContext } from "@context/LyricsDataContext";
 
 import useDatabase from "@hooks/useDatabase";
 import useAuth from "@hooks/useAuth";
@@ -31,7 +28,6 @@ const StyledSavedLyrics = styled.main`
 `;
 
 const SavedLyrics = () => {
-  const { setLyricsData } = useContext(lyricsDataContext);
 
   const {
     getAllLyricsFromDB,
@@ -90,8 +86,7 @@ const SavedLyrics = () => {
     ));
   }
 
-  function handleOnChange(event) {
-    //console.log(event.target.value);
+  function handleOnChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const selectedArtist = event.target.value;
 
     filterByArtist(selectedArtist);

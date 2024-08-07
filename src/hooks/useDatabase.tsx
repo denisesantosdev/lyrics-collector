@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { useContext } from "react";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { firebaseConfig } from "../../firebase/firebaseConfig";
-import { lyricsDataContext } from "../context/LyricsDataContext";
-import { ToastContext } from "../context/ToastContext";
+import { useState, useContext, useEffect } from "react";
+
+import { auth, database as db } from "../firebase/firebaseConfig";
+
+import { lyricsDataContext } from "@context/LyricsDataContext";
+import { ToastContext } from "@context/ToastContext";
+
+import { DatabaseItemInterface } from "models/interfaces";
 
 import {
-  getFirestore,
   collection,
-  addDoc,
   serverTimestamp,
   getDocs,
   doc,
@@ -18,22 +17,18 @@ import {
   where,
   orderBy,
   deleteDoc,
+  DocumentData,
 } from "firebase/firestore";
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { LyricsDataType, ToastType } from "@models/types";
 
 const useDatabase = () => {
-  const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
-  const [savedLyrics, setSavedLyrics] = useState([]);
-  const [isDbAltered, setIsDbAltered] = useState(false);
-  const [filteredArtists, setFilteredArtists] = useState([]);
-  const [itemExists, setItemExists] = useState({
-    itemInDB: "",
-    itemStatus: false,
-  });
-  const { setToastState } = useContext(ToastContext);
+  const { lyricsData } = useContext(lyricsDataContext) as LyricsDataType;
+  const { setToastState } = useContext(ToastContext) as ToastType;
+
+  const [savedLyrics, setSavedLyrics] = useState<DocumentData[]>([]);
+  const [isDbAltered, setIsDbAltered] = useState<boolean>(false);
+  const [filteredArtists, setFilteredArtists] = useState<DocumentData[]>([]);
+  const [searchResults, setSearchResults] = useState<DocumentData[]>([]);
 
   const collectionName = "lyrics";
   const lyricsRef = collection(db, collectionName);
@@ -42,15 +37,17 @@ const useDatabase = () => {
     try {
       const docRef = doc(lyricsRef);
 
-      await setDoc(docRef, {
+      const NewItem: DatabaseItemInterface = {
         songTitle: lyricsData.songTitle,
         artistName: lyricsData.artistName,
         lyrics: lyricsData.lyrics,
-        uid: auth.currentUser.uid,
+        uid: auth.currentUser?.uid,
         createdAt: serverTimestamp(),
         id: docRef.id,
         albumImageUrl: lyricsData.albumImage,
-      });
+      };
+
+      await setDoc(docRef, NewItem);
 
       setToastState({
         visible: true,
@@ -61,7 +58,6 @@ const useDatabase = () => {
 
       //console.log("Document written with ID: ", docRef.id);
     } catch (e) {
-      //console.error("Error adding document: ", e);
       setToastState({
         visible: true,
         message: "Oh-oh! An error has ocurred!",
@@ -70,11 +66,11 @@ const useDatabase = () => {
     }
   }
 
-  async function checkIfItemExistsInDB(itemInDB, itemToCompare) {
+  async function searchDB(searchQuery: string) {
     const q = query(
       lyricsRef,
-      where("uid", "==", auth.currentUser.uid),
-      where(itemInDB, "==", itemToCompare)
+      where("uid", "==", auth.currentUser?.uid),
+      where("songTitle", "==", searchQuery)
     );
 
     const querySnapshot = await getDocs(q);
@@ -83,22 +79,16 @@ const useDatabase = () => {
     });
 
     if (!querySnapshot.empty) {
-      setItemExists({
-        itemInDB: fetchedData[0],
-        itemStatus: true,
-      });
-    } else {
-      setItemExists({
-        itemInDB: "",
-        itemStatus: false,
-      });
+      setSearchResults([])
     }
+
+    setSearchResults(fetchedData);
   }
 
   async function getAllLyricsFromDB() {
     const q = query(
       lyricsRef,
-      where("uid", "==", auth.currentUser.uid),
+      where("uid", "==", auth.currentUser?.uid),
       orderBy("createdAt", "desc")
     );
 
@@ -111,10 +101,10 @@ const useDatabase = () => {
     setSavedLyrics(fetchedData);
   }
 
-  async function filterByArtist(artist) {
+  async function filterByArtist(artist: string) {
     const q = query(
       lyricsRef,
-      where("uid", "==", auth.currentUser.uid),
+      where("uid", "==", auth.currentUser?.uid),
       orderBy("createdAt", "desc"),
       where("artistName", "==", artist)
     );
@@ -128,9 +118,11 @@ const useDatabase = () => {
     setFilteredArtists(fetchedData);
   }
 
-  async function deleteSongLyricFromDB(docId) {
+  async function deleteSongLyricFromDB(docId: string) {
     await deleteDoc(doc(db, collectionName, docId));
+
     setIsDbAltered((prev) => !prev);
+
     setToastState({
       visible: true,
       message: "Song deleted from collection",
@@ -147,8 +139,8 @@ const useDatabase = () => {
     savedLyrics,
     isDbAltered,
     filteredArtists,
-    checkIfItemExistsInDB,
-    itemExists,
+    searchResults,
+    searchDB,
   };
 };
 

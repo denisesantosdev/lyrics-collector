@@ -9,8 +9,8 @@ import Header from "@components/Header/Header";
 import SongLyrics from "@components/SongLyrics/SongLyrics";
 import SavedLyrics from "@components/SavedLyrics/SavedLyrics";
 
-import LyricsData from "@context/LyricsDataContext";
-import ToastContextProvider from "@context/ToastContext";
+import LyricsDataContextWrapper from "@context/LyricsDataContext";
+import ToastContextWrapper from "@context/ToastContext";
 
 import GlobalStyle from "@styles/GlobalStyle";
 import { lightTheme } from "@styles/themes";
@@ -21,8 +21,8 @@ function App() {
       <ThemeProvider theme={lightTheme}>
         <GlobalStyle />
 
-        <ToastContextProvider>
-          <LyricsData>
+        <ToastContextWrapper>
+          <LyricsDataContextWrapper>
             <Router>
               <Header />
               <Routes>
@@ -44,10 +44,10 @@ function App() {
                 />
               </Routes>
             </Router>
-          </LyricsData>
+          </LyricsDataContextWrapper>
           
           <Toast />
-        </ToastContextProvider>
+        </ToastContextWrapper>
       </ThemeProvider>
     </>
   );

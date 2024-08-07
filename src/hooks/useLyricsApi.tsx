@@ -1,14 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
-import { lyricsDataContext } from "../context/LyricsDataContext";
-import { ToastContext } from "../context/ToastContext";
-import { Timestamp } from "firebase/firestore";
+import { useContext, useState, useEffect } from "react";
 
-const useLyricsApi = (songTitle, artistName) => {
-  const { toastState, setToastState } = useContext(ToastContext);
-  const { lyricsData, setLyricsData } = useContext(lyricsDataContext);
-  const [loading, setLoading] = useState(true);
+import { lyricsDataContext } from "@context/LyricsDataContext";
+import { ToastContext } from "@context/ToastContext";
+import { LyricsDataInterface } from "models/interfaces";
+import { LyricsDataType, ToastType } from "@models/types";
 
-  const [error, setError] = useState(null);
+const useLyricsApi = (
+  songTitle: string | undefined,
+  artistName: string | undefined
+) => {
+  const { setToastState } = useContext(ToastContext) as ToastType;
+  const { setLyricsData } = useContext(lyricsDataContext) as LyricsDataType;
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function searchLyrics() {
@@ -20,7 +24,7 @@ const useLyricsApi = (songTitle, artistName) => {
         const data = await res.json();
 
         if (Object.keys(data).length === 0) {
-          throw new Error(404);
+          throw new Error("404");
         }
 
         setLyricsData({
@@ -30,8 +34,8 @@ const useLyricsApi = (songTitle, artistName) => {
           lyrics: data.lyrics,
         });
 
-        setLoading(false)
-      } catch (err) {
+        setLoading(false);
+      } catch (err: any) {
         if (err.message === "404") {
           setToastState({
             visible: true,
@@ -51,7 +55,7 @@ const useLyricsApi = (songTitle, artistName) => {
     searchLyrics();
   }, []);
 
-  return { loading, error };
+  return { loading };
 };
 
 export default useLyricsApi;

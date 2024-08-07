@@ -7,8 +7,9 @@ import useAuth from "@hooks/useAuth";
 import SignOutBtn from "@components/SignOutBtn/SignOutBtn";
 
 import { musicIcon } from "@styles/icons";
+import { menuStateType } from "@models/types";
 
-const StyledNav = styled.nav`
+const StyledNav = styled.nav<{$menuIsClosed?: boolean}>`
 
    ul {
     display: flex;
@@ -23,7 +24,7 @@ const StyledNav = styled.nav`
   }
 
   @media (max-width: 500px) {
-    display: ${(props) => (props.menuIsClosed ? "none" : "block")};
+    display: ${(props) => (props.$menuIsClosed ? "none" : "block")};
     position: absolute;
     right: 1rem;
     top: 100%;
@@ -44,7 +45,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Nav = ({ menuIsClosed, setMenuIsClosed }) => {
+const Nav: React.FC<menuStateType> = ({ menuIsClosed, setMenuIsClosed }) => {
   const { authCheckAuthState, isUserLoggedIn } = useAuth();
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const Nav = ({ menuIsClosed, setMenuIsClosed }) => {
   }, []);
 
   return (
-    <StyledNav menuIsClosed={menuIsClosed}>
+    <StyledNav $menuIsClosed={menuIsClosed}>
       {isUserLoggedIn ? (
         <ul>
           <li>

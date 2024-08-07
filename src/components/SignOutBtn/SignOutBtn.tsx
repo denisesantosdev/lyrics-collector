@@ -4,7 +4,11 @@ import useAuth from "@hooks/useAuth";
 
 import { logoutIcon } from "@styles/icons";
 
-const SignOutBtn = ({setMenuIsClosed}) => {
+interface SignOutBtnProps {
+  setMenuIsClosed: Function
+}
+
+const SignOutBtn: React.FC<SignOutBtnProps> = ({setMenuIsClosed}) => {
   const { authSignOut } = useAuth();
 
   return (
@@ -12,7 +16,7 @@ const SignOutBtn = ({setMenuIsClosed}) => {
       to={"/"}
       onClick={()=>{
         authSignOut()
-        setMenuIsClosed((prev) => !prev)
+        setMenuIsClosed((prev: boolean) => !prev)
         }}>
       <img
         src={logoutIcon}

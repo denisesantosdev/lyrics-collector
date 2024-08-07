@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import Nav from "@components/Nav/Nav";
@@ -17,17 +17,22 @@ const StyledHeader = styled.header`
       max-width: 1024px;
       margin-inline: auto;
     }
-  
 `;
 
 const Header = () => {
-  const [menuIsClosed, setMenuIsClosed] = useState(true)
+  const [menuIsClosed, setMenuIsClosed] = useState(true);
 
   return (
     <StyledHeader>
-        <Logo />
-        <MenuBtn setMenuIsClosed={setMenuIsClosed} menuIsClosed={menuIsClosed}/>
-         <Nav menuIsClosed={menuIsClosed} setMenuIsClosed={setMenuIsClosed}/>
+      <Logo />
+      <MenuBtn
+        setMenuIsClosed={setMenuIsClosed}
+        menuIsClosed={menuIsClosed}
+      />
+      <Nav
+        menuIsClosed={menuIsClosed}
+        setMenuIsClosed={setMenuIsClosed}
+      />
     </StyledHeader>
   );
 };

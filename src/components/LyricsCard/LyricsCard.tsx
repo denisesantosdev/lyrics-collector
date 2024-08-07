@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { deleteIcon } from "@styles/icons";
 
@@ -37,7 +37,15 @@ const StyledLyricsCard = styled.div`
   }
 `;
 
-const LyricsCard = ({ item, deleteSongLyricFromDB }) => {
+interface LyricsCardProps {
+  item?: any;
+  deleteSongLyricFromDB: Function;
+}
+
+const LyricsCard: React.FC<LyricsCardProps> = ({
+  item,
+  deleteSongLyricFromDB,
+}) => {
   const navigate = useNavigate();
 
   function handleOnClick() {

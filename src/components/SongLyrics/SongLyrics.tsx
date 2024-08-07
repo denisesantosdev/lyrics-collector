@@ -12,6 +12,7 @@ import { lyricsDataContext } from "@context/LyricsDataContext";
 import { ToastContext } from "@context/ToastContext";
 
 import PageBg from "@components/Pagebg/PageBg";
+import { LyricsDataType, ToastType } from "@models/types";
 
 const StyledLyrics = styled.div`
   color: ${(props) => props.theme.colors.text};
@@ -66,36 +67,34 @@ const StyledLyricsHeader = styled.header`
 
 const SongLyrics = () => {
   const { songTitle, artistName } = useParams();
-  const { setToastState } = useContext(ToastContext);
-  const { loading, error } = useLyricsApi(songTitle, artistName);
 
-  //console.log();
+  const { setToastState } = useContext(ToastContext) as ToastType;
+  const { lyricsData } = useContext(lyricsDataContext) as LyricsDataType;
 
-  const { lyricsData } = useContext(lyricsDataContext);
+  const { loading } = useLyricsApi(songTitle, artistName);
   const { authCheckAuthState, isUserLoggedIn } = useAuth();
-  //console.log(lyricsData);
 
   const {
     saveLyricsToDB,
-    checkIfItemExistsInDB,
-    itemExists,
     deleteSongLyricFromDB,
     isDbAltered,
+    searchDB,
+    searchResults,
   } = useDatabase();
 
   useEffect(() => {
     authCheckAuthState();
 
     if (lyricsData && isUserLoggedIn) {
-      checkIfItemExistsInDB("songTitle", lyricsData.songTitle);
+      searchDB(lyricsData.songTitle);
     }
   }, [isDbAltered, lyricsData, isUserLoggedIn]);
 
   function renderBtn() {
     if (isUserLoggedIn) {
-      if (itemExists.itemStatus) {
+      if (searchResults.length !== 0) {
         return (
-          <button onClick={() => deleteSongLyricFromDB(itemExists.itemInDB.id)}>
+          <button onClick={() => deleteSongLyricFromDB(searchResults[0].id)}>
             <img
               src={deleteIcon}
               alt=""
@@ -120,7 +119,7 @@ const SongLyrics = () => {
           setToastState({
             visible: true,
             message: "Login or create an account to save!",
-            type: "warning",
+            type: "alert",
           });
         }}>
         <img

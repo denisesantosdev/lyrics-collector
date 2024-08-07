@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useAuth from "../customHooks/useAuth";
+import useAuth from "@hooks/useAuth";
 
 import Input from "@components/Input/Input";
 import Btn from "@components/Btn/Btn";
@@ -24,7 +24,8 @@ const StyledWrapper = styled.section`
 const StyledBg = styled.div`
   width: 100%;
   background: 
-        linear-gradient(to top, ${props=>props.theme.colors.primary}, transparent 90%), 
+        linear-gradient(to top, ${(props) =>
+          props.theme.colors.primary}, transparent 90%), 
         url(${doodles});
   background-size: cover;
   background-repeat: no-repeat;
@@ -33,7 +34,8 @@ const StyledBg = styled.div`
   @media (min-width: 1024px) {
      order: 0;
      background: 
-        linear-gradient(to right, ${props=>props.theme.colors.primary}, transparent 90%), 
+        linear-gradient(to right, ${(props) =>
+          props.theme.colors.primary}, transparent 90%), 
         url(${doodles});
         background-size: cover;
         background-repeat: no-repeat;
@@ -71,13 +73,12 @@ const SignInPage = () => {
     authSignInWithGoogle,
   } = useAuth();
 
-  function handleOnChange(event) {
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   }
-  //console.log(user);
 
   return (
     <StyledWrapper>

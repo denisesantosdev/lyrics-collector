@@ -1,16 +1,13 @@
-import  {  useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import { ToastContext } from "@context/ToastContext";
 
-import {
-  alertIcon,
-  errorIcon,
-  successIcon,
-  closeIcon,
-} from "@styles/icons";
+import { alertIcon, errorIcon, successIcon, closeIcon } from "@styles/icons";
 
-const StyledToast = styled.div`
+import { ToastType } from "@models/types";
+
+const StyledToast = styled.div<{ $type: string }>`
   position: fixed;
   z-index: 1000;
   bottom: 0;
@@ -20,7 +17,7 @@ const StyledToast = styled.div`
   border-radius: 0.3rem;
   margin: 1rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  background-color: ${({ type, theme }) => theme.colors[type]};
+  background-color: ${({ $type, theme }) => theme.colors[$type]};
   display: flex;
   justify-items: center;
   gap: 1rem;
@@ -31,9 +28,8 @@ const StyledToast = styled.div`
 `;
 
 const Toast = () => {
-  const { toastState, setToastState } = useContext(ToastContext);
+  const { toastState, setToastState } = useContext(ToastContext) as ToastType;
 
-  //console.log(toastState);
   let toastIcon;
 
   switch (toastState.type) {
@@ -47,10 +43,16 @@ const Toast = () => {
       break;
   }
 
+  useEffect(() => {
+    setInterval(() => {
+      setToastState({ ...toastState, visible: false });
+    }, 9000);
+  }, [toastState]);
+
   return (
     <>
       {toastState.visible && (
-        <StyledToast type={toastState.type}>
+        <StyledToast $type={toastState.type}>
           <img
             src={toastIcon}
             alt=""

@@ -1,6 +1,7 @@
+import React from "react";
 import styled from "styled-components";
 
-const StyledBtn = styled.button`
+const StyledBtn = styled.button<{$primary?: boolean}>`
     background-color: ${(props) =>
       props.$primary ? props.theme.colors.accent : "transparent"};
     color: ${(props) =>
@@ -17,7 +18,13 @@ const StyledBtn = styled.button`
     }
 `;
 
-const Btn = (props) => {
+interface BtnProps {
+  isPrimary?: boolean;
+  btnText: string
+  handleOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const Btn: React.FC<BtnProps> = (props) => {
 //console.log(props);
   return (
     <StyledBtn
