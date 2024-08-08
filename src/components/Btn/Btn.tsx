@@ -1,31 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledBtn = styled.button<{$primary?: boolean}>`
-    background-color: ${(props) =>
-      props.$primary ? props.theme.colors.accent : "transparent"};
-    color: ${(props) =>
-      props.$primary ? props.theme.colors.primary : props.theme.colors.text};
-    border: 2px solid ${(props) => props.theme.colors.border};
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: .3rem;
-    transition: all .3s ease;
-    padding: ${props=>props.theme.padding.large};
+const StyledBtn = styled.button<{ $primary?: boolean }>`
+  background-color: ${(props) =>
+    props.$primary ? "rgb(var(--accent-clr))" : "transparent"};
+  color: ${(props) =>
+    props.$primary ? "var(--text-alt-clr)" : "var(--text-clr)"};
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 
-    &:hover, &:focus {
-      transform: scale(1.1,1.1)
-    }
+  &:hover {
+     background-color: ${(props) =>
+    props.$primary ? "rgb(var(--accent-clr))" : "transparent"};
+    transform: translateY(-2px);
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 interface BtnProps {
   isPrimary?: boolean;
-  btnText: string
+  btnText: string;
   handleOnClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Btn: React.FC<BtnProps> = (props) => {
-//console.log(props);
   return (
     <StyledBtn
       onClick={props.handleOnClick}

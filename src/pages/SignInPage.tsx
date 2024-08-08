@@ -93,10 +93,10 @@ const SignInPage = () => {
         </header>
         <h1>Sign in and save your favorite lyrics!</h1>
         <Input
-          type="email"
+          type="text"
           name="email"
           id="email"
-          placeholder="Email"
+          labelText="Email"
           handleOnChange={handleOnChange}
           required={true}
         />
@@ -104,7 +104,7 @@ const SignInPage = () => {
           type="password"
           name="password"
           id="password"
-          placeholder="Password"
+          labelText="Password"
           handleOnChange={handleOnChange}
           required={true}
         />

@@ -25,21 +25,27 @@ const baseTheme = {
 
     large: "1rem 2rem", // 1rem top and bottom, 2rem left and right
   },
+  screenSizes: {
+    sm: "480px",
+    md: "768px",
+    lg: "1024px",
+    xl: "1200px",
+  },
 };
 
 const lightTheme = {
   ...baseTheme,
   colors: {
-    primary: "#f0f0f0", // Light gray for background
-    secondary: "#ffffff",
-    background: "#333333",
-    text: "#333333", // Dark gray for text
-    error: "#f28b82", // Pastel red for error state
-    warning: "#ffad47", // Pastel orange for warning state
-    success: "#a0d99b", // Pastel green for success state
-    //accent: "#8ecae6", // Soft pastel blue for accent color
-    accent: "#333333",
-    border: "#333333",
+    primary: "#f0f0f0", 
+    secondary: "#333333",
+    accent: "142, 202, 230", 
+    text: "#333333", 
+    textAlt: "#f0f0f0", 
+    error: "#f28b82", 
+    alert: "#ffad47", 
+    success: "#a0d99b", 
+    background: "#333333", // delete
+    border: "#333333",// delete
   },
 };
 

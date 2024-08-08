@@ -1,7 +1,9 @@
 import { createGlobalStyle } from "styled-components";
-import { baseTheme } from "./themes";
+import cssVariables from "@styles/cssVariables";
 
 const GlobalStyle = createGlobalStyle`
+${cssVariables}
+
   body {
     font-family: ${(props) => props.theme.fonts.body};
     background-color: ${(props) => props.theme.colors.primary};
