@@ -16,11 +16,11 @@ const StyledInput = styled.div`
     font-size: var(--fs-md);
     border: 2px solid #ccc;
     border-radius: 5px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease;
 
     &:focus {
       border-color: rgb(var(--accent-clr));
-      box-shadow: 0 0 5px rgba(var(--accent-clr), 0.5);
+      box-shadow: 0 0 10px rgba(var(--accent-clr), 0.5);
       outline: none;
     }
   }
@@ -33,7 +33,7 @@ interface InputProps {
   name: string;
   required: boolean;
   handleOnChange: ChangeEventHandler<HTMLInputElement>;
-  labelText: string
+  labelText?: string
 }
 
 const Input: React.FC<InputProps> = (props) => {

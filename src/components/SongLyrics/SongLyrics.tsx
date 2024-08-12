@@ -6,7 +6,8 @@ import useDatabase from "@hooks/useDatabase";
 import useAuth from "@hooks/useAuth";
 import useLyricsApi from "@hooks/useLyricsApi";
 
-import { saveIcon, deleteIcon } from "@styles/icons";
+import { CiTrash } from "react-icons/ci";
+import { CiBookmarkPlus } from "react-icons/ci";
 
 import { lyricsDataContext } from "@context/LyricsDataContext";
 import { ToastContext } from "@context/ToastContext";
@@ -15,19 +16,19 @@ import PageBg from "@components/Pagebg/PageBg";
 import { LyricsDataType, ToastType } from "@models/types";
 
 const StyledLyrics = styled.div`
-  color: ${(props) => props.theme.colors.text};
+  color: rgba(var(--text-clr));
   text-align: center;
   padding: 1rem;
 
   > div {
-    max-width: 700px;
+    max-width: var(--screen-lg);
     margin-inline: auto;
     padding: 1rem;
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: rgba(var(--primary-clr));
   }
 
-  @media (min-width: 1024px) {
-      max-width: 1024px;
+  @media (min-width: ${({ theme }) => theme.screenSizes.lg}) {
+      max-width: var(--screen-lg);
       margin-inline: auto;
     }
 `;
@@ -43,7 +44,7 @@ const StyledLyricsHeader = styled.header`
     border-radius: .3rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
-    @media (min-width: 400px) {
+    @media (min-width: ${({ theme }) => theme.screenSizes.sm}) {
       max-width: 300px;
       margin: auto;
     }
@@ -56,11 +57,11 @@ const StyledLyricsHeader = styled.header`
   }
 
   h1 {
-    font-size: ${(props) => props.theme.fontSizes.xLarge};
+    font-size: var(--fs-xl);
   }
-
+  
   h2 {
-    font-size: ${(props) => props.theme.fontSizes.large};
+    font-size: var(--fs-lg);
 
   }
 `;
@@ -95,19 +96,13 @@ const SongLyrics = () => {
       if (searchResults.length !== 0) {
         return (
           <button onClick={() => deleteSongLyricFromDB(searchResults[0].id)}>
-            <img
-              src={deleteIcon}
-              alt=""
-            />
+            <CiTrash></CiTrash>
           </button>
         );
       } else {
         return (
           <button onClick={() => saveLyricsToDB()}>
-            <img
-              src={saveIcon}
-              alt=""
-            />
+            <CiBookmarkPlus></CiBookmarkPlus>
           </button>
         );
       }
@@ -122,10 +117,8 @@ const SongLyrics = () => {
             type: "alert",
           });
         }}>
-        <img
-          src={saveIcon}
-          alt=""
-        />
+        <CiBookmarkPlus></CiBookmarkPlus>
+
       </button>
     );
   }

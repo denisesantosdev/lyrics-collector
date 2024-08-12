@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import { menuBtnIcon, closeIcon } from "@styles/icons";
 import { menuStateType } from "@models/types";
 
+import { CiMenuFries } from "react-icons/ci";
+import { CiSquareRemove } from "react-icons/ci";
+
 const StyledBtn = styled.button`
-    @media (min-width: 500px) {
-        display: none;
-    }
+  padding: 1rem;
+
+  @media (min-width: ${({ theme }) => theme.screenSizes.sm}) {
+    display: none;
+  }
 `;
 
 const MenuBtn: React.FC<menuStateType> = ({
@@ -15,15 +19,9 @@ const MenuBtn: React.FC<menuStateType> = ({
   return (
     <StyledBtn onClick={() => setMenuIsClosed((prev) => !prev)}>
       {menuIsClosed ? (
-        <img
-          src={menuBtnIcon}
-          alt=""
-        />
+        <CiMenuFries></CiMenuFries>
       ) : (
-        <img
-          src={closeIcon}
-          alt=""
-        />
+        <CiSquareRemove></CiSquareRemove>
       )}
     </StyledBtn>
   );

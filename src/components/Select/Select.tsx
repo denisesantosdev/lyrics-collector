@@ -3,9 +3,15 @@ import styled from "styled-components";
 const StyledSelect = styled.select`
     background-color: inherit;
     padding: 1rem;
-    border: none;
     font-weight: bold;
-    border-bottom: 2px solid ${(props) => props.theme.colors.border};
+    border: none;
+    border-bottom: 1px solid rgba(var(--secondary-clr),0.2);
+    
+    &:focus {
+      border: none;
+      border-top: 1px solid rgba(var(--accent-clr));
+      outline: none;
+    }
 `;
 
 interface SelectProps {

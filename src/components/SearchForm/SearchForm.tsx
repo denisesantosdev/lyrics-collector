@@ -13,7 +13,7 @@ const StyledForm = styled.form`
   gap: 1rem;
   padding: 1rem;
 
-  @media (min-width: 700px) {
+  @media (min-width: ${({ theme }) => theme.screenSizes.sm}) {
      flex-direction: row;
      justify-content: center;
   }

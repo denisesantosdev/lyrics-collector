@@ -5,12 +5,13 @@ import { logoIcon } from "@styles/icons";
 
 const StyledLogo = styled.div`
     font-weight: bold;
-    font-size: ${(props) => props.theme.fontSizes.large};
+    font-size: var(--fs-lg);
+    padding: 1rem;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${(props) => props.theme.colors.text};
+  color: rgba(var(--text-clr));
   display: flex;
   gap: .5rem;
 `;

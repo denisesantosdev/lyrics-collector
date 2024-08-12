@@ -5,8 +5,8 @@ const GlobalStyle = createGlobalStyle`
 ${cssVariables}
 
   body {
-    font-family: ${(props) => props.theme.fonts.body};
-    background-color: ${(props) => props.theme.colors.primary};
+    font-family: var(--font-body);
+    background-color: rgba(var(--primary-clr));
     overflow-x: hidden;
     color: ${(props) => props.theme.colors.text};;
   }
@@ -15,6 +15,15 @@ ${cssVariables}
     background-color: inherit;
     border: none;
     cursor: pointer;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  a {
+    text-decoration: none;
   }
 
 /* 

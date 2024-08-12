@@ -36,17 +36,29 @@ const baseTheme = {
 const lightTheme = {
   ...baseTheme,
   colors: {
+    primary: "240, 240, 240", 
+    secondary: "51, 51, 51",
+    accent: "142, 202, 230",
+    text: "51, 51, 51", 
+    textAlt: "240, 240, 240", 
+    error: "#f28b82", 
+    alert: "#ffad47",
+    success: "#a0d99b",
+  }
+
+  /* 
+    colors: {
     primary: "#f0f0f0", 
     secondary: "#333333",
-    accent: "142, 202, 230", 
+    accent: "#8ecae6",
     text: "#333333", 
     textAlt: "#f0f0f0", 
     error: "#f28b82", 
     alert: "#ffad47", 
-    success: "#a0d99b", 
-    background: "#333333", // delete
-    border: "#333333",// delete
-  },
+    success: "#a0d99b",
+};
+
+  */
 };
 
 export { lightTheme, baseTheme };

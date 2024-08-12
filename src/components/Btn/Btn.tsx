@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 const StyledBtn = styled.button<{ $primary?: boolean }>`
   background-color: ${(props) =>
-    props.$primary ? "rgb(var(--accent-clr))" : "transparent"};
+    props.$primary ? "rgba(var(--accent-clr))" : "transparent"};
   color: ${(props) =>
-    props.$primary ? "var(--text-alt-clr)" : "var(--text-clr)"};
+    props.$primary ? "rgba(var(--text-alt-clr))" : "rgba(var(--text-clr))"};
   padding: 10px 20px;
   font-size: 16px;
   border: 2px solid #ccc;
@@ -16,12 +16,8 @@ const StyledBtn = styled.button<{ $primary?: boolean }>`
 
   &:hover {
      background-color: ${(props) =>
-    props.$primary ? "rgb(var(--accent-clr))" : "transparent"};
+    props.$primary ? "rgba(var(--accent-clr))" : "transparent"};
     transform: translateY(-2px);
-  }
-
-  &:focus {
-    outline: none;
   }
 `;
 

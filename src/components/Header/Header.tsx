@@ -9,12 +9,10 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     place-items: center;
-    padding: 1rem;
-    margin-bottom: 3rem;
     position: relative;
    
-    @media (min-width: 1024px) {
-      max-width: 1024px;
+    @media (min-width: ${({ theme }) => theme.screenSizes.lg}) {
+      max-width: var(--screen-lg);
       margin-inline: auto;
     }
 `;

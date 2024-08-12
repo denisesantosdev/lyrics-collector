@@ -11,10 +11,9 @@ import useAuth from "@hooks/useAuth";
 const StyledSavedLyrics = styled.main`
   display: grid;
   gap: 1rem;
-  background-color: ${(props) => props.theme.colors.primary};
 
-  @media (min-width: 700px) {
-      max-width: 700px;
+  @media (min-width: ${({ theme }) => theme.screenSizes.lg}) {
+      max-width: var(--screen-lg);
       margin-inline: auto;
     }
 
