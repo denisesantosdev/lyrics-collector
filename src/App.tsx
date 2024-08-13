@@ -4,10 +4,10 @@ import { ThemeProvider } from "styled-components";
 import Home from "@pages/Home";
 import SignInPage from "@pages/SignInPage";
 
-import Toast from "@components/Toast/Toast";
-import Header from "@components/Header/Header";
-import SongLyrics from "@components/SongLyrics/SongLyrics";
-import SavedLyrics from "@components/SavedLyrics/SavedLyrics";
+import Toast from "@components/Toast";
+import Header from "@components/Header";
+import SongLyrics from "@components/SongLyrics";
+import SavedLyrics from "@components/SavedLyrics";
 
 import LyricsDataContextWrapper from "@context/LyricsDataContext";
 import ToastContextWrapper from "@context/ToastContext";
@@ -24,7 +24,6 @@ function App() {
         <ToastContextWrapper>
           <LyricsDataContextWrapper>
             <Router>
-              <Header />
               <Routes>
                 <Route
                   path="/"

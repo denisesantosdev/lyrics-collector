@@ -2,22 +2,35 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Btn from "@components/Btn/Btn";
-import Input from "@components/Input/Input";
+import { CiSearch } from "react-icons/ci";
+
+import SearchInput from "@components/SearchInput";
 
 import { searchQueryInterface } from "models/interfaces";
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 1rem;
+  background-color: rgb(var(--accent-clr));
 
   @media (min-width: ${({ theme }) => theme.screenSizes.sm}) {
      flex-direction: row;
      justify-content: center;
   }
 `;
+
+const StyledSearchButton = styled.button`
+  color: rgba(var(--text-alt-clr));
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+`
 
 const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState<searchQueryInterface>({
@@ -41,7 +54,7 @@ const SearchForm = () => {
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
-      <Input
+      <SearchInput
         type="text"
         placeholder="Song Title"
         name="songTitle"
@@ -49,7 +62,7 @@ const SearchForm = () => {
         id="songTitle"
         handleOnChange={handleOnChange}
       />
-      <Input
+      <SearchInput
         type="text"
         placeholder="Artist Name"
         name="artistName"
@@ -57,10 +70,7 @@ const SearchForm = () => {
         id="artistName"
         handleOnChange={handleOnChange}
       />
-      <Btn
-        btnText="Search"
-        isPrimary={true}
-      />
+      <StyledSearchButton><CiSearch></CiSearch></StyledSearchButton>
     </StyledForm>
   );
 };

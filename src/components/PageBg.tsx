@@ -6,10 +6,10 @@ const StyledPageBg = styled.div`
     inset: 0;
     top: 50%;
     background: 
-        linear-gradient(to bottom, ${props=>props.theme.colors.primary}, transparent 90%), 
+        linear-gradient(to bottom, rgba(var(--primary-clr)), transparent 90%), 
         url(${doodles});
     background-size: cover;
-    z-index: -100000;
+    z-index: 100000;
 `;
 
 const PageBg = () => {

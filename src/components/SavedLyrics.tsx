@@ -1,9 +1,9 @@
 import  { useContext, useEffect } from "react";
 import styled from "styled-components";
 
-import LyricsCard from "@components/LyricsCard/LyricsCard";
-import Select from "@components/Select/Select";
-import PageBg from "@components/Pagebg/PageBg";
+import LyricsCard from "@components/LyricsCard";
+import Select from "@components/Select";
+import PageBg from "@components/PageBg";
 
 import useDatabase from "@hooks/useDatabase";
 import useAuth from "@hooks/useAuth";

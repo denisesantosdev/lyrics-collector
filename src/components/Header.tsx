@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import Nav from "@components/Nav/Nav";
-import Logo from "@components/Logo/Logo";
-import MenuBtn from "@components/MenuBtn/MenuBtn";
+import Nav from "@components/Nav";
+import Logo from "@components/Logo";
+import MenuBtn from "@components/MenuBtn";
 
 const StyledHeader = styled.header`
     display: flex;

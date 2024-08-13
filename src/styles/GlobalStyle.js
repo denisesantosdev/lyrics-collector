@@ -8,7 +8,7 @@ ${cssVariables}
     font-family: var(--font-body);
     background-color: rgba(var(--primary-clr));
     overflow-x: hidden;
-    color: ${(props) => props.theme.colors.text};;
+    color: rgb(var(--text-clr));
   }
 
   button {

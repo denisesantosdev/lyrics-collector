@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import useAuth from "@hooks/useAuth";
 
-import Input from "@components/Input/Input";
-import Btn from "@components/Btn/Btn";
+import Input from "@components/Input";
+import Btn from "@components/Btn";
 
 import { Link } from "react-router-dom";
 
@@ -12,10 +12,10 @@ import { doodles } from "@styles/images";
 const StyledWrapper = styled.section`
   position: absolute;
   inset: 0;
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: rgba(var(--primary-clr));
   display: grid;
   
-  @media (min-width: 1024px) {
+  @media (min-width:${({ theme }) => theme.screenSizes.lg}) {
      grid-template-columns: 1fr 1fr; 
      gap: 2rem;
   }
@@ -24,8 +24,7 @@ const StyledWrapper = styled.section`
 const StyledBg = styled.div`
   width: 100%;
   background: 
-        linear-gradient(to top, ${(props) =>
-          props.theme.colors.primary}, transparent 90%), 
+        linear-gradient(to top, rgba(var(--primary-clr)), transparent 90%), 
         url(${doodles});
   background-size: cover;
   background-repeat: no-repeat;
@@ -34,8 +33,7 @@ const StyledBg = styled.div`
   @media (min-width: 1024px) {
      order: 0;
      background: 
-        linear-gradient(to right, ${(props) =>
-          props.theme.colors.primary}, transparent 90%), 
+        linear-gradient(to right, rgba(var(--primary-clr)), transparent 90%), 
         url(${doodles});
         background-size: cover;
         background-repeat: no-repeat;

@@ -1,18 +1,19 @@
 import styled from "styled-components";
 
-import SearchForm from "@components/SearchForm/SearchForm";
-import PageBg from "@components/Pagebg/PageBg";
+import SearchForm from "@components/SearchForm";
+import PageBg from "@components/PageBg";
+import Header from "@components/Header";
 
 const StyledHome = styled.div`
-  display: grid;
-  gap: 2rem;
+ 
 `;
 
 const Home = () => {
   return (
     <StyledHome>
+      <Header />
       <SearchForm />
-      <PageBg/>
+      <PageBg />
     </StyledHome>
   );
 };

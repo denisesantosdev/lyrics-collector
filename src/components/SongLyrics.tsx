@@ -12,7 +12,7 @@ import { CiBookmarkPlus } from "react-icons/ci";
 import { lyricsDataContext } from "@context/LyricsDataContext";
 import { ToastContext } from "@context/ToastContext";
 
-import PageBg from "@components/Pagebg/PageBg";
+import PageBg from "@components/PageBg";
 import { LyricsDataType, ToastType } from "@models/types";
 
 const StyledLyrics = styled.div`
